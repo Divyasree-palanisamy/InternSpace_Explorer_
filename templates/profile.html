@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #ce5646;
+            background-color: aquamarine;
+        }
+
+        .profile-info {
+            margin-bottom: 30px;
+        }
+        h3{
+            color: darkred;
+            background-color: rgb(231, 206, 143);
+            width: 400px;
+            height: 30px;
+            font-size: 24px;
+        }
+        .profile-info h2 {
+            margin: 0;
+            color: #6324b4;
+        }
+
+        .profile-info p {
+            margin: 5px 0;
+            font-size: 1.1em;
+            color: rgb(212, 33, 102);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            color: #ce5646;
+        }
+
+        td {
+            background-color: #fff;
+        }
+
+        .back-link {
+            margin-top: 20px;
+            display: block;
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        .back-link a {
+            color: #834a91;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body background="/static/i3.jpeg">
+    <div class="container">
+        <h1>User Profile</h1>
+        
+        <div class="profile-info">
+            <h2>Welcome, {{ session['username'] }}!</h2>
+<p>Email: {{ session.get('email', 'N/A') }}</p>
+<p>Phone Number: {{ session.get('phone_number', 'N/A') }}</p>
+<p>Joined Date: {{ session.get('joined_date', 'N/A') }}</p>
+        </div>
+
+        <h2>Applied Internships</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Company</th>
+                    <th>Location</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Web Development Internship</td>
+                    <td>ABC Corp</td>
+                    <td>New York, NY</td>
+                    <td><a href="#">View Details</a></td>
+                </tr>
+                <tr>
+                    <td>Data Science Internship</td>
+                    <td>XYZ Ltd</td>
+                    <td>San Francisco, CA</td>
+                    <td><a href="#">View Details</a></td>
+                </tr>
+                <tr>
+                    <td>Graphic Design Internship</td>
+                    <td>Creative Studios</td>
+                    <td>Austin, TX</td>
+                    <td><a href="#">View Details</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a class="back-link" href="#">Back to Dashboard</a>
+    </div>
+</body>
+</html>

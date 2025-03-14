@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Internship Finder</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .settings-container {
+            width: 80%;
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: rgba(206, 201, 178, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #ce5646;
+            margin-bottom: 20px;
+            background-color: #4ae2bc;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section h2 {
+            color: #953bdf;
+            border-bottom: 2px solid #e24a57;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 30%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #4a90e2;
+            outline: none;
+        }
+
+        .form-group button {
+            background-color: #293fbd;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .form-group button:hover {
+            background-color: #357ABD;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #888;
+        }
+
+        .footer a {
+            color: #4a90e2;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body background="/static/i3.jpeg">
+    <div class="settings-container">
+        <h1>Settings</h1>
+        
+        <!-- Personal Information Section -->
+        <div class="section">
+            <h2>Personal Information</h2>
+            <form action="/update_profile" method="POST">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="bio">Bio</label>
+                    <textarea id="bio" name="bio" rows="4" placeholder="Tell us about yourself"></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Update Profile</button>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Preferences Section -->
+        <div class="section">
+            <h2>Preferences</h2>
+            <form action="/update_preferences" method="POST">
+                <div class="form-group">
+                    <label for="notifications">Notification Preferences</label>
+                    <select id="notifications" name="notifications">
+                        <option value="email">Email Notifications</option>
+                        <option value="sms">SMS Notifications</option>
+                        <option value="none">No Notifications</option>
+                    </select>
+                </div>
+
+                <div class="section">
+                    <h2>Linked Accounts</h2>
+                    <form action="/manage_linked_accounts" method="POST">
+                        <div class="form-group">
+                            <label for="linkedin">LinkedIn</label>
+                            <input type="text" id="linkedin" name="linkedin" placeholder="LinkedIn profile URL">
+                        </div>
+                        <div class="form-group">
+                            <label for="github">GitHub</label>
+                            <input type="text" id="github" name="github" placeholder="GitHub profile URL">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit">Update Linked Accounts</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="form-group">
+                    <label for="theme">Theme</label>
+                    <select id="theme" name="theme">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Save Preferences</button>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Password Section -->
+        <div class="section">
+            <h2>Change Password</h2>
+            <form action="/change_password" method="POST">
+                <div class="form-group">
+                    <label for="current-password">Current Password</label>
+                    <input type="password" id="current-password" name="current-password" placeholder="Enter your current password" required>
+                </div>
+                <div class="form-group">
+                    <label for="new-password">New Password</label>
+                    <input type="password" id="new-password" name="new-password" placeholder="Enter your new password" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Change Password</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Update Email Section -->
+        <div class="section">
+            <h2>Update Email Address</h2>
+            <form action="/update_email" method="POST">
+                <div class="form-group">
+                    <label for="new-email">New Email Address</label>
+                    <input type="email" id="new-email" name="new-email" placeholder="Enter your new email address" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Update Email</button>
+                </div>
+            </form>
+        </div>
+        
+        
+        <div class="footer">
+            <p><a href="/dashboard">Back to Dashboard</a></p>
+        </div>
+    </div>
+</body>
+</html>

@@ -49,7 +49,7 @@
 
         .sidebar ul li a {
             text-decoration: none;
-            color: #ddd;
+            color: #fcfafa;
             display: block;
             padding: 10px;
             border-radius: 5px;
@@ -195,7 +195,7 @@
             display: none;
         }
     </style>
-</head>
+</head> 
 <body>
     <div class="dashboard-container">
         <div class="sidebar">
@@ -261,96 +261,82 @@
             <hr>
 
             <!-- Internship Preferences Form -->
-            <br>
-            <div class="form-section">
-                <div id="filterSection" class="hidden"> <!-- Initially hidden -->
-                    <h3>Filter Internships</h3>
-                    <form id="filterForm">
-                        <div class="filter-details">
-                            <div class="col">
-                                <label for="filterKeyword">Field:</label>
-                                <select id="filterKeyword" required>
-                                    <option value="">Select field</option>
-                                    <option value="Software">Software</option>
-                                    <option value="Marketing">Marketing</option>
-                                    <option value="Design">Design</option>
-                                    <option value="Data Science">Data Science</option>
-                                    <option value="Finance">Finance</option>
-                                    <option value="Engineering">Engineering</option>
-                                </select>
-                            </div>
-                            <div class="col">
-                                <label for="filterDepartment">Department:</label>
-                                <input type="text" id="filterDepartment" placeholder="Department (e.g., Computer Science)" required>
-                            </div>
-                              
-                            <div class="col">
-                                <label for="filterDomain">Domain:</label>
-                                <input type="text" id="filterDomain" placeholder="Domain (e.g., Web Development, AI)" required>
-                            </div>
-                            <div class="col">
-                                <label for="filterCountry">Country:</label>
-                                <input type="text" id="filterCountry" placeholder="Country (e.g., India)" required>
-                            </div>
-                            <div class="col">
-                                <label for="filterState">State:</label>
-                                <input type="text" id="filterState" placeholder="State/Province (e.g., Maharashtra)" required>
-                            </div>
-                            <div class="col">
-                                <label for="filterDistrict">District:</label>
-                                <input type="text" id="filterDistrict" placeholder="District/Region (e.g., Mumbai Suburban)" required>
-                            </div>
-                            <div class="col">
-                                <label for="filterCity">City:</label>
-                                <input type="text" id="filterCity" placeholder="City/Town (e.g., Mumbai)" required>
-                            </div>
-                            
-                            <div class="col">
-                                <label for="filterDuration">Training Duration:</label>
-                                <input type="number" id="filterDuration" placeholder="Duration (in months)" required>
-                            </div>
-                            <div class="col">
-                                <label for="filterStartDate">Start Date:</label>
-                                <input type="date" id="filterStartDate" placeholder="Preferred Start Date" required>
-                            </div>
-                            <div class="col">
-                                <label for="filterEndDate">End Date:</label>
-                                <input type="date" id="filterEndDate" placeholder="Preferred End Date" required>
-                            </div>
-                            <div class="col">
-                                <label for="trainingDuration">Day Duration:</label>
-                                <input type="number" id="trainingDuration" placeholder="Training Duration (in hours)" required>
-                            </div>
-                            <div class="col">
-                                <label for="resumeUpload">Resume:</label>
-                                <input type="file" id="resumeUpload" >
-                            </div>
-                    
-                            <div class="col">
-                                <label for="filterType">Type:</label>
-                                <select id="filterType" required>
-                                    <option value="">Type</option>
-                                    <option value="paid">Paid</option>
-                                    <option value="unpaid">Unpaid</option>
-                                </select>
-                            </div>
-                            
-                            <div class="col hidden" id="priceRangeSection">
-                                <label for="filterPrice">Price Range:</label>
-                                <select id="filterPrice" required>
-                                    <option value="">Price Range</option>
-                                    <option value="600-1000">600 - 1,000</option>
-                                    <option value="1000-5000">1,000 - 5,000</option>
-                                    <option value="5000-10000">5,000 - 10,000</option>
-                                    <option value="10000-50000">10,000 - 50,000</option>
-                                    <option value="50000-100000">50,000 - 100,000</option>
-                                </select>
-                            </div>
-                        </div>
-    
-                        <button type="submit">Filter</button>
-                    </form>
+            <br><form id="filterForm" action="/filter_internships" method="POST">
+                <div class="filter-details">
+                    <div class="col">
+                        <label for="filterKeyword">Field:</label>
+                        <select id="filterKeyword" name="filterKeyword" required>
+                            <option value="">Select field</option>
+                            <option value="Software">Software</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Design">Design</option>
+                            <option value="Data Science">Data Science</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Engineering">Engineering</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="filterDepartment">Department:</label>
+                        <input type="text" id="filterDepartment" name="filterDepartment" placeholder="Department (e.g., Computer Science)" required>
+                    </div>
+                    <div class="col">
+                        <label for="filterDomain">Domain:</label>
+                        <input type="text" id="filterDomain" name="filterDomain" placeholder="Domain (e.g., Web Development, AI)" required>
+                    </div>
+                    <div class="col">
+                        <label for="filterCountry">Country:</label>
+                        <input type="text" id="filterCountry" name="filterCountry" placeholder="Country (e.g., India)" required>
+                    </div>
+                    <div class="col">
+                        <label for="filterState">State:</label>
+                        <input type="text" id="filterState" name="filterState" placeholder="State/Province (e.g., Maharashtra)" required>
+                    </div>
+                    <div class="col">
+                        <label for="filterDistrict">District:</label>
+                        <input type="text" id="filterDistrict" name="filterDistrict" placeholder="District/Region (e.g., Mumbai Suburban)" required>
+                    </div>
+                    <div class="col">
+                        <label for="filterCity">City:</label>
+                        <input type="text" id="filterCity" name="filterCity" placeholder="City/Town (e.g., Mumbai)" required>
+                    </div>
+                    <div class="col">
+                        <label for="filterDuration">Training Duration:</label>
+                        <input type="number" id="filterDuration" name="filterDuration" placeholder="Duration (in months)" required>
+                    </div>
+                    <div class="col">
+                        <label for="filterStartDate">Start Date:</label>
+                        <input type="date" id="filterStartDate" name="filterStartDate" required>
+                    </div>
+                    <div class="col">
+                        <label for="filterEndDate">End Date:</label>
+                        <input type="date" id="filterEndDate" name="filterEndDate" required>
+                    </div>
+                    <div class="col">
+                        <label for="trainingDuration">Day Duration:</label>
+                        <input type="number" id="trainingDuration" name="trainingDuration" placeholder="Training Duration (in hours)" required>
+                    </div>
+                    <div class="col">
+                        <label for="filterType">Type:</label>
+                        <select id="filterType" name="filterType" required onchange="togglePriceRange()">
+                            <option value="">Type</option>
+                            <option value="paid">Paid</option>
+                        </select>
+                    </div>
+                    <div class="col hidden" id="priceRangeSection">
+                        <label for="filterPrice">Price Range:</label>
+                        <select id="filterPrice" name="filterPrice">
+                            <option value="">Price Range</option>
+                            <option value="600-1000">600 - 1,000</option>
+                            <option value="1000-5000">1,000 - 5,000</option>
+                            <option value="5000-10000">5,000 - 10,000</option>
+                            <option value="10000-50000">10,000 - 50,000</option>
+                            <option value="50000-100000">50,000 - 100,000</option>
+                        </select>
+                    </div>
                 </div>
+                <button type="submit">Filter</button>
+            </form>
+            
                
                     <!-- Add any additional information display here -->
                 </div>
@@ -369,6 +355,7 @@
     </div>
 
     <script>
+        
           // Function to toggle the visibility of the price range section
           function togglePriceRange() {
             const filterType = document.getElementById('filterType').value;

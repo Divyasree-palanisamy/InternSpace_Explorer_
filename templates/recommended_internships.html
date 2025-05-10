@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,89 +5,114 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recommended Internships</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            color: rgb(165, 66, 143);
-            background-color: #dbca8f;
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ece9e6;
+    background-image: linear-gradient(135deg, #ffffff, #ece9e6);
+    color: #333;
+}
 
-        }
-        .container {
-            width: 85%;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: rgba(231, 221, 221, 0.5);
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            overflow: auto;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        table, th, td {
-            border: 1px solid rgb(120, 232, 236);
-            border-radius: 3px;
-            border-width: 5px;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: rgba(221, 210, 210, 0.89);
-        }
-        td {
-            background-color: rgba(214, 207, 207, 0.644);
-        }
-        a {
-            color: #834a91;
-        }
-        .back-link {
-            margin-top: 20px;
-        }
+.container {
+    width: 90%;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 14px;
+    border: none;
+    text-align: left;
+    color: #333;
+    font-size: 14px;
+}
+
+th {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+}
+
+tr:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.01);
+    transition: transform 0.3s;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.back-link a {
+    margin-top: 20px;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.back-link a:hover {
+    background-color: #0056b3;
+}
+
     </style>
 </head>
-<body >
-    <h1>Recommended Internships</h1>
-    <p style="font-size:large"><b>Welcome, {{ username }}!</b></p>
+<body>
+    <div class="container">
+       <!-- recommended_internships.html -->
+<h2>Recommended Internships</h2>
+{% if internships %}
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Company</th>
+        <th>Location</th>
+        <th>Duration</th>
+        <th>Fees</th>
+        <th>Company Link</th>
+    </tr>
+    {% for internship in internships %}
+    <tr>
+        <td>{{ internship['internship_title'] }}</td>
+        <td>{{ internship['company_name'] }}</td>
+        <td>{{ internship['location'] }}</td>
+        <td>{{ internship['duration'] }}</td>
+        <td>{{ internship['fee'] }}</td>
+        <td><a href="{{ internship['application_link'] }}" target="_blank">Visit</a></td>
+    </tr>
+    {% endfor %}
+</table>
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Company</th>
-                <th>Headquarters</th>
-                <th>Location</th>
-                <th>URL</th>
-                <th>Paid</th>
-                <th>ISO Certified</th>
-                <th>Ratings</th>
-                <th>Fees</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for internship in internships %}
-                <tr>
-                    <td>{{ internship.id }}</td>
-                    <td>{{ internship.title }}</td>
-                    <td>{{ internship.company }}</td>
-                    <td>{{ internship.headquarters }}</td>
-                    <td>{{ internship.location }}</td>
-                    <td><a href="{{ internship.url }}" target="_blank">Link</a></td>
-                    <td>{{ internship.paid }}</td>
-                    <td>{{ internship.isocertified }}</td>
-                    <td>{{ internship.ratings }}</td>
-                    <td>{{ internship.fees|safe }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <button onclick="location.href='/add_to_cart/{{ internship.id }}'">Add to Cart</button>
+{% else %}
+    <p>No internships found based on your filter criteria.</p>
+{% endif %}
 
+    <center>  </div><div class="back-link">
+        <a href="/dashboard">Go to Dashboard</a>
+    </div></center>    
+  
 </body>
 </html>

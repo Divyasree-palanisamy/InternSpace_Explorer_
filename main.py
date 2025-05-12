@@ -16,7 +16,7 @@ def get_db_connection():
         host="localhost",
         user="root",
         password="Divya@2004",
-        database="ti"
+        database="uof"
     )
 conn = get_db_connection()
 mycursor = conn.cursor(dictionary=True)
@@ -38,7 +38,7 @@ def submit_details():
         host='localhost',
         user='root',
         password='Divya@2004',
-        database='ti'
+        database='uof'
     )
     cursor = connection.cursor()
 
@@ -225,6 +225,94 @@ def view_cart():
 
     return redirect('/dashboard')
 
+@app.route('/update_profile', methods=['GET', 'POST'])
+def update_profile():
+    if request.method == 'POST':
+        # Retrieve the updated details from the form
+        username = request.form.get('username')
+        email = request.form.get('email')
+        bio = request.form.get('bio')
+
+        # Get the user_id from session or any other method
+        user_id = session.get('user_id')
+
+        if not user_id:
+            flash('You must be logged in to update your profile.', 'error')
+            return redirect(url_for('login'))
+
+        # Update the profile in the database
+        try:
+            connection = get_db_connection()
+            cursor = connection.cursor()
+
+            update_query = """UPDATE users
+                              SET username = %s, email = %s, bio = %s
+                              WHERE id = %s"""
+            cursor.execute(update_query, (username, email, bio, user_id))
+            connection.commit()
+
+            flash("Profile updated successfully!", "success")
+        except Error as e:
+            print(f"Error updating profile: {e}")
+            flash("Error updating profile. Please try again.", "error")
+        finally:
+            cursor.close()
+            connection.close()
+
+        return redirect(url_for('profile'))  # Redirect to the profile page to show updated details
+
+    else:
+        # GET request: Fetch existing profile details to prefill the form
+        user_id = session.get('user_id')
+
+        if not user_id:
+            flash('You must be logged in to update your profile.', 'error')
+            return redirect(url_for('login'))
+
+        # Fetch user details from the database
+        try:
+            connection = get_db_connection()
+            cursor = connection.cursor(dictionary=True)
+
+            cursor.execute("SELECT username, email, bio FROM users WHERE id = %s", (user_id,))
+            user = cursor.fetchone()
+
+            if not user:
+                flash("User not found.", "error")
+                return redirect(url_for('login'))
+
+            return render_template('update_profile.html', user=user)
+        except Error as e:
+            print(f"Error fetching user details: {e}")
+            flash("Error fetching profile details. Please try again.", "error")
+            return redirect(url_for('profile'))
+        finally:
+            cursor.close()
+            connection.close()
+
+
+@app.route('/update_preferences', methods=['POST'])
+def update_preferences():
+    notifications = request.form.get('notifications')
+    theme = request.form.get('theme')
+    return render_template('update_preferences.html', notifications=notifications, theme=theme)
+
+@app.route('/manage_linked_accounts', methods=['POST'])
+def manage_linked_accounts():
+    linkedin = request.form.get('linkedin')
+    github = request.form.get('github')
+    return render_template('manage_linked_accounts.html', linkedin=linkedin, github=github)
+
+@app.route('/change_password', methods=['POST'])
+def change_password():
+    return render_template('change_password.html')
+
+@app.route('/update_email', methods=['POST'])
+def update_email():
+    new_email = request.form.get('new-email')
+    return render_template('update_email.html', new_email=new_email)
+
+
 @app.route('/settings', methods=['GET', 'POST'])
 def settings():
     return render_template('settings.html')
@@ -346,38 +434,6 @@ def filter_internships():
 
     return render_template('recommended_internships.html', internships=internships)
 
-@app.route('/update_profile', methods=['POST'])
-def update_profile():
-    if request.method == 'POST':
-        username = request.form['username']
-        email = request.form['email']
-        bio = request.form['bio']
-        
-        conn = get_db_connection()
-        mycursor = conn.cursor()
-
-        # Check if the profile already exists
-        mycursor.execute("SELECT * FROM user_profiles WHERE username = %s", (username,))
-        profile = mycursor.fetchone()
-
-        if profile:
-            # Update existing profile
-            mycursor.execute("""
-                UPDATE user_profiles 
-                SET email = %s, bio = %s 
-                WHERE username = %s
-            """, (email, bio, username))
-        else:
-            # Insert new profile
-            mycursor.execute("""
-                INSERT INTO user_profiles (username, email, bio)
-                VALUES (%s, %s, %s)
-            """, (username, email, bio))
-
-        conn.commit()
-        conn.close()
-
-        return "Profile updated successfully!"  # Success message
 
 
 @app.route('/view_internship')

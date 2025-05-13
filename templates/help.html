@@ -46,8 +46,8 @@ h1 {
 }
 
 .section h2 {
-    color: #333;
-    font-size: 1.8em;
+    color: #db3a3a;
+    font-size: 1.4em;
     margin-bottom: 15px;
     padding-bottom: 8px;
 }
@@ -103,20 +103,19 @@ h1 {
     transform: scale(1.05);
 }
 
-.footer {
-    text-align: center;
-    margin-top: 25px;
-    color: #888;
-}
-
-.footer a {
-    color: #4CAF50;
+.back-link a {
+    margin-top: 20px;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #88de47;
+    color: white;
     text-decoration: none;
-    font-weight: bold;
+    border-radius: 8px;
+    transition: background-color 0.3s;
 }
 
-.footer a:hover {
-    text-decoration: underline;
+.back-link a:hover {
+    background-color: #3cb300;
 }
 
     </style>
@@ -265,11 +264,11 @@ h1 {
         <button>Download Manual</button>
     </a>
 </div>
+<center>
+<div class="back-link">
+    <a href="/dashboard">Go to Dashboard</a>
+</div></center>    
 
-        <!-- Footer -->
-        <div class="footer">
-            <p>Back to <a href="/dashboard">Dashboard</a></p>
-        </div>
     </div>
 </body>
 </html>

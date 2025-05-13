@@ -5,18 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile with Avatar Selection</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(200, 230, 255, 0.8));
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: #333;
-        }
-
+      body {
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+}
         .profile-container {
             width: 45%;
             background-color: rgba(177, 208, 236, 0.7);
@@ -54,11 +53,11 @@
 
         .avatar:hover {
             transform: scale(1.1);
-            border-color: #8ecae6;
+            border-color: #8ee69b;
         }
 
         .avatar.selected {
-            border-color: #219ebc;
+            border-color: #21bc2e;
         }
 
         .profile-pic {
@@ -81,6 +80,24 @@
             text-decoration: none;
             transition: background-color 0.3s;
         }
+        .upload-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e0e0e0;
+    font-size: 2em;
+    color: #555;
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-avatar input[type="file"] {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
 
         .profile-actions a:hover {
             background-color: #8ecae6;
@@ -89,7 +106,7 @@
         .back-link {
             display: block;
             margin-top: 20px;
-            color: #219ebc;
+            color: #33bc21;
             text-decoration: none;
         }
 
@@ -97,18 +114,13 @@
             text-decoration: underline;
         }
     </style>
-    <script>
-        function selectAvatar(img) {
-            document.querySelectorAll('.avatar').forEach(el => el.classList.remove('selected'));
-            img.classList.add('selected');
-            document.querySelector('.profile-pic').src = img.src;
-        }
-    </script>
+   
 </head>
 <body>
     <div class="profile-container">
         <h1>User Profile</h1>
-        <img src="{{ url_for('static', filename='default-profile.png') }}" alt="Profile Picture" class="profile-pic">
+        <img src="{{ session.get('avatar_url', url_for('static', filename='default-profile.png')) }}" alt="Profile Picture"
+            class="profile-pic">
         <div class="avatar-container">
             <img src="https://i.pravatar.cc/80?img=1" class="avatar" onclick="selectAvatar(this)">
             <img src="https://i.pravatar.cc/80?img=2" class="avatar" onclick="selectAvatar(this)">
@@ -117,6 +129,11 @@
             <img src="https://i.pravatar.cc/80?img=5" class="avatar" onclick="selectAvatar(this)">
             <img src="https://i.pravatar.cc/80?img=10" class="avatar" onclick="selectAvatar(this)">
         </div>
+        <label class="avatar upload-avatar">
+            <span>+</span>
+            <input type="file" accept="image/*" onchange="uploadCustomAvatar(event)">
+        </label>
+        
         <h2>{{ username }}</h2>
         <p>Email: {{ session.get('email') }}</p>
         <p>Joined Date: {{ session.get('joined_date') }}</p>
@@ -125,5 +142,44 @@
 
         </div>
     </div>
+    <script>
+        function selectAvatar(img) {
+            document.querySelectorAll('.avatar').forEach(el => el.classList.remove('selected'));
+            img.classList.add('selected');
+            document.querySelector('.profile-pic').src = img.src;
+
+            // Send avatar URL to server to store in session
+            fetch('/update_avatar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ avatar_url: img.src })
+            });
+        }
+
+        function uploadCustomAvatar(event) {
+                const file = event.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const imageUrl = e.target.result;
+                    document.querySelectorAll('.avatar').forEach(el => el.classList.remove('selected'));
+                    document.querySelector('.profile-pic').src = imageUrl;
+
+                    // Send base64 image to server
+                    fetch('/upload_custom_avatar', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ image_base64: imageUrl })
+                    });
+                };
+                reader.readAsDataURL(file);
+            }
+    </script>
+    
 </body>
 </html>

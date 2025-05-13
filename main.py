@@ -16,7 +16,7 @@ def get_db_connection():
         host="localhost",
         user="root",
         password="Divya@2004",
-        database="uof"
+        database="uop"
     )
 conn = get_db_connection()
 mycursor = conn.cursor(dictionary=True)
@@ -38,7 +38,7 @@ def submit_details():
         host='localhost',
         user='root',
         password='Divya@2004',
-        database='uof'
+        database='uop'
     )
     cursor = connection.cursor()
 
@@ -169,6 +169,7 @@ def add_internship():
         paid = 1 if 'paid' in request.form else 0
         iso_certified = 1 if 'iso_certified' in request.form else 0
         ratings = request.form['ratings']
+        print("Form Submitted Successfully!")
 
         print("Form Data:", internship_title, department, company_name, location, duration, fee,
               contact_number, contact_email, headquarters, application_link, paid, iso_certified, ratings)
@@ -191,7 +192,8 @@ def add_internship():
             print("Internship Added Successfully!")
 
         except Exception as e:
-            print("Error adding internship:", e)
+            error_message = f"Error adding internship: {e}"
+            print(error_message)
             conn.rollback()
 
         finally:
@@ -201,6 +203,36 @@ def add_internship():
         return redirect('/view_internship')
 
     return render_template('add_internship.html')
+
+
+
+@app.route('/view_internship')
+def view_internship():
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)  # Fetch data as dictionaries
+
+        query = """SELECT internship_title, department, company_name, headquarters, 
+                          location, duration, fee, contact_number, contact_email, 
+                          iso_certified, application_link, paid, ratings 
+                   FROM internships"""
+        cursor.execute(query)
+        internships = cursor.fetchall()
+        print("Internships Fetched:", internships)
+
+
+    except Exception as e:
+        print("Error fetching internships:", e)
+        internships = []
+
+    finally:
+        cursor.close()
+        conn.close()
+
+    return render_template('view_internship.html', internships=internships)
+
+
+
 
 @app.route('/view_cart')
 def view_cart():
@@ -225,72 +257,6 @@ def view_cart():
 
     return redirect('/dashboard')
 
-@app.route('/update_profile', methods=['GET', 'POST'])
-def update_profile():
-    if request.method == 'POST':
-        # Retrieve the updated details from the form
-        username = request.form.get('username')
-        email = request.form.get('email')
-        bio = request.form.get('bio')
-
-        # Get the user_id from session or any other method
-        user_id = session.get('user_id')
-
-        if not user_id:
-            flash('You must be logged in to update your profile.', 'error')
-            return redirect(url_for('login'))
-
-        # Update the profile in the database
-        try:
-            connection = get_db_connection()
-            cursor = connection.cursor()
-
-            update_query = """UPDATE users
-                              SET username = %s, email = %s, bio = %s
-                              WHERE id = %s"""
-            cursor.execute(update_query, (username, email, bio, user_id))
-            connection.commit()
-
-            flash("Profile updated successfully!", "success")
-        except Error as e:
-            print(f"Error updating profile: {e}")
-            flash("Error updating profile. Please try again.", "error")
-        finally:
-            cursor.close()
-            connection.close()
-
-        return redirect(url_for('profile'))  # Redirect to the profile page to show updated details
-
-    else:
-        # GET request: Fetch existing profile details to prefill the form
-        user_id = session.get('user_id')
-
-        if not user_id:
-            flash('You must be logged in to update your profile.', 'error')
-            return redirect(url_for('login'))
-
-        # Fetch user details from the database
-        try:
-            connection = get_db_connection()
-            cursor = connection.cursor(dictionary=True)
-
-            cursor.execute("SELECT username, email, bio FROM users WHERE id = %s", (user_id,))
-            user = cursor.fetchone()
-
-            if not user:
-                flash("User not found.", "error")
-                return redirect(url_for('login'))
-
-            return render_template('update_profile.html', user=user)
-        except Error as e:
-            print(f"Error fetching user details: {e}")
-            flash("Error fetching profile details. Please try again.", "error")
-            return redirect(url_for('profile'))
-        finally:
-            cursor.close()
-            connection.close()
-
-
 @app.route('/update_preferences', methods=['POST'])
 def update_preferences():
     notifications = request.form.get('notifications')
@@ -303,14 +269,19 @@ def manage_linked_accounts():
     github = request.form.get('github')
     return render_template('manage_linked_accounts.html', linkedin=linkedin, github=github)
 
-@app.route('/change_password', methods=['POST'])
-def change_password():
-    return render_template('change_password.html')
 
-@app.route('/update_email', methods=['POST'])
-def update_email():
-    new_email = request.form.get('new-email')
-    return render_template('update_email.html', new_email=new_email)
+@app.route('/update_avatar', methods=['POST'])
+def update_avatar():
+    data = request.get_json()
+    session['avatar_url'] = data['avatar_url']
+    return jsonify({'status': 'avatar updated'})
+
+@app.route('/upload_custom_avatar', methods=['POST'])
+def upload_custom_avatar():
+    data = request.get_json()
+    image_base64 = data.get('image_base64')
+    session['avatar_url'] = image_base64  # Store base64 directly in session
+    return jsonify({'status': 'custom avatar uploaded'})
 
 
 @app.route('/settings', methods=['GET', 'POST'])
@@ -433,32 +404,6 @@ def filter_internships():
     conn.close()
 
     return render_template('recommended_internships.html', internships=internships)
-
-
-
-@app.route('/view_internship')
-def view_internship():
-    try:
-        conn = get_db_connection()
-        cursor = conn.cursor(dictionary=True)  # Fetch data as dictionaries
-
-        query = """SELECT internship_title, department, company_name, headquarters, 
-                          location, duration, fee, contact_number, contact_email, 
-                          iso_certified, application_link, paid, ratings 
-                   FROM internships"""
-        cursor.execute(query)
-        internships = cursor.fetchall()
-
-    except Exception as e:
-        print("Error fetching internships:", e)
-        internships = []
-
-    finally:
-        cursor.close()
-        conn.close()
-
-    return render_template('view_internship.html', internships=internships)
-
 
 
 @app.route('/logout')

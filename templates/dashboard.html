@@ -64,11 +64,16 @@
             flex: 1;
             padding: 20px;
             background: #f5f5f5;
+            
+    background-color: #e8f0fe;
+
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+
         }
 
         .form-section {
             padding: 20px;
-            background-color: #fff;
+            background-color: #b8d2f7;
             border: 1px solid #ccc;
             border-radius: 5px;
             margin-bottom: 20px;
@@ -195,19 +200,68 @@
         .hidden {
             display: none;
         }
+        .welcome-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background-color: #e8f0fe;
+    border-left: 6px solid #4285f4;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.welcome-icon {
+    width: 80px;
+    height: 80px;
+}
+
+.welcome-text h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #2b2d42;
+}
+
+.welcome-text p {
+    margin: 5px 0;
+    color: #4a4a4a;
+    font-size: 16px;
+}
+/* Container for the whole form */
+.form-container {
+  max-width: 700px; /* reduce this to make it narrower */
+  margin: 0 auto; /* centers the form */
+  padding: 20px;
+  background-color: #a197dc;
+  border-radius: 10px;
+}
+
+/* Apply to individual inputs to restrict width */
+.form-group-inline input,
+.form-group-inline select {
+  max-width: 128px; /* limit width */
+  width: 100%; /* responsive */
+  padding: 5px;
+  margin-right: 20px;
+}
+
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head> 
 <body>
     <div class="dashboard-container">
         <div class="sidebar">
             <h2>Dashboard</h2>
             <ul>
-                <li><b><a href="/profile">Profile</a></b></li><br>
-                <li><b><a href="/settings">Settings</a></b></li><br>
-                <li><b><a href="/help">Help</a></b></li><br>
-                <li><b><a href="/logout_confirmation">Logout</a></b></li>
+                <li><b><a href="/profile"><i class="fas fa-user"></i> Profile</a></b></li><br>
+                <li><b><a href="/settings"><i class="fas fa-cog"></i> Settings</a></b></li><br>
+                <li><b><a href="/help"><i class="fas fa-question-circle"></i> Help</a></b></li><br>
+                <li><b><a href="/logout_confirmation"><i class="fas fa-sign-out-alt"></i> Logout</a></b></li>
             </ul>
         </div>
+        
        
         <div class="main-content">
             <!-- Username Display -->
@@ -222,8 +276,15 @@
                 </div>
             {% endif %}
             {% endwith %}
-            <h2>Welcome, {{ username }}!</h2>
-
+            <div class="welcome-container">
+                <img src="https://cdn-icons-png.flaticon.com/512/5790/5790327.png" alt="Career Growth Icon" class="welcome-icon">
+                <div class="welcome-text">
+                    <h2>Welcome, {{ username }}! 🎉</h2>
+                    <p>We're glad to see you back. Let’s make today productive and successful!</p>
+                    <p><em>“Success is the sum of small efforts, repeated day in and day out.” – R. Collier</em></p>
+                </div>
+            </div>
+            
             <!-- User Info Form -->
             <div class="form-section" id="userInfoSection">
                 <h3>Student Information</h3>
@@ -244,14 +305,18 @@
                     
                         <label for="phone">Phone Number:</label>
                         <input type="tel" id="phone" name="phone" required>
-                    
-                        <label for="role">Role:</label>
-                        <select id="role" name="role" required>
-                            <option value="student">Student</option>
-                            <option value="professional">Professional</option>
-                        </select>
-                    
+                        <div class="form-group-inline">
+                            <label>Role:</label>
+                            <select>
+                                <option>Professional</option>
+                                <option>Student</option>
+                            </select>                
+                        </div>
+                          
+                
+                    <br><center>
                         <button type="submit">Submit</button>
+                    </center>
                     </form>
                 {% endif %}
                 {% if message %}

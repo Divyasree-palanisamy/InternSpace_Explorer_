@@ -1,111 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>InternSpace</title>
+    <link rel="icon" href="static/icon.png" />
     <style>
-        body, html {
+        * {
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body,
+        html {
             margin: 0;
             padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0f4f8;
+            background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1920&q=80');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
             height: 100%;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-  
-           
-          
+            background-attachment: fixed;
         }
-        .home-container {
-            text-align: center;
-            max-width: 80%;
-            margin: 20px;
-            margin: 20px auto; 
-        }
-        .home-container h1 {
-            margin-bottom: 20px;
-        }
-        .buttons .button {
-            display: inline-block;
-            margin: 50px;
-            padding: 17px;
-            text-decoration: none;
-            background-color: #cc00ff;
-            color: white;
-            border-radius: 10px;
-        }
-        p {
-    word-spacing: 10px; /* Adjust spacing between words */
-    line-height: 1.6; /* Adjust line height */
-    padding: 20px;
-    margin-bottom: 15px; /* Add margin to bottom of h3 */
-    font-size: 20px;
-    color: rgb(241, 207, 17);
-    border: 2px solid #1bbfcaef; /* Border style */
-    border-radius: 10px; /* Rounded corners */
-    background-color: cornsilk;
-    border-width:7px;
-  
-}
 
-        
-        h1{
-            
-            padding : 15px;
-            background-color: rgb(192, 230, 88);
-            
-        }
-        h2{
-            color: rgb(209, 34, 57);
-            background-color: aliceblue;
-            border: 2px solid #699b9eef; /* Border style */
-    border-radius: 10px; /* Rounded corners */
-    border-width:7px;
-    font-family: Arial, Helvetica, sans-serif;
-        }
         .navbar {
             width: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 10px 0;
+            background-color: rgba(0, 0, 0, 0.75);
+            padding: 15px 20px;
             position: fixed;
             top: 0;
             display: flex;
             justify-content: flex-end;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             z-index: 1000;
         }
-       
+
         .navbar .button {
-            margin: 0 20px;
-            padding: 10px 20px;
+            margin: 0 10px;
+            padding: 12px 25px;
             text-decoration: none;
-            background-color: #cc00ff;
+            background: linear-gradient(to right, #cc00ff, #9900cc);
             color: white;
-            border-radius: 10px;
+            border-radius: 30px;
             font-size: 16px;
-            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .navbar .button:hover {
+            background: #9900cc;
+            transform: scale(1.07);
+        }
+
+        .home-container {
+            margin: 130px auto 60px auto;
+            max-width: 1100px;
+            width: 90%;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            color: #2f2f2f;
+            backdrop-filter: saturate(180%) blur(14px);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            padding: 25px;
+            background: rgba(0, 204, 255, 0.1);
+            color: #353636;
+            border-radius: 20px;
+            font-size: 42px;
+            font-weight: 700;
+            text-align: center;
+            animation: fadeIn 1.5s ease;
+        }
+
+        h2 {
+            text-align: center;
+            color: #d92257;
+            background-color: aliceblue;
+            border: 3px solid #699b9e;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 30px 0;
+            font-size: 24px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        p {
+            word-spacing: 5px;
+            line-height: 1.8;
+            font-size: 18px;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #1c1c1c;
+            background-color: cornsilk;
+            border: 3px solid #1bbfca;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+        }
+
+        .cta {
+            display: block;
+            width: fit-content;
+            margin: 30px auto 0;
+            padding: 14px 28px;
+            background-color: #28a745;
+            color: white;
+            font-size: 18px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            color: white;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            font-size: 14px;
+            border-top: 1px solid #ccc;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
-<body background="/static/images (6).jfif">
+
+<body>
     <div class="navbar">
-        <div class="stylish-border solid-border"></div>
         <a href="/signup" class="button">Sign Up</a>
         <a href="/login" class="button">Login</a>
     </div>
+
     <div class="home-container">
-        <h1>Welcome to InternSpace Explorer✨✨✨</h1><br>
-        <h2>
-           <br> <b>Your gateway to amazing internship opportunities worldwide.<br>
-            <br></h2><br>
-        <p>  Welcome to InternSpace, your ultimate destination for discovering internships across the globe! Whether you are a student looking to gain practical experience, a fresh graduate seeking to kickstart your career, or a professional aiming to switch fields, we have got you covered. Our platform connects you with top companies and organizations offering paid and unpaid internships in various domains such as Software Development, Marketing, Design, Data Science, Finance, Engineering, and more. 
-        
-            We understand the importance of finding the right internship that matches your skills and interests. That's why we provide advanced filtering options, including location preferences, duration, start and end dates, training requirements, and price ranges. Upload your resume and let our intelligent system recommend the best internships tailored to your needs. 
-        
-            Join InternSpace today and take the first step towards a rewarding career!
-        </b>  </p><br><br><br>
-       
+        <h1>🌍 Welcome to InternSpace Explorer ✨</h1>
+        <h2>Your gateway to amazing internship opportunities worldwide.</h2>
+        <p>
+            Welcome to InternSpace, your ultimate destination for discovering internships across the globe! Whether you
+            are a student looking to gain practical experience, a fresh graduate seeking to kickstart your career, or a
+            professional aiming to switch fields, we’ve got you covered.
+            <br /><br />
+            Our platform connects you with top companies and organizations offering paid and unpaid internships in
+            various domains such as Software Development, Marketing, Design, Data Science, Finance, Engineering, and
+            more.
+            <br /><br />
+            We understand the importance of finding the right internship that matches your skills and interests. That’s
+            why we provide all the required filtering options, including location preferences, duration, start and end dates,
+            and price ranges.
+        </p>
+        <a href="/signup" class="cta">🚀 Get Started</a>
     </div>
+
+    <footer>
+        © 2025 InternSpace Explorer | Empowering your internship journey 🌐
+    </footer>
 </body>
 </html>
-

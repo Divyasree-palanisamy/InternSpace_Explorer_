@@ -1,189 +1,177 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Internspace Explorer</title>
     <style>
-        body, html {
+        body,
+        html {
+            margin: 0;
+            padding: 0;
             height: 100%;
-            font-family: Arial, sans-serif;
-  
-            color: rgba(0, 0, 0, 0.8);
-            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .login-wrapper {
+            flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
         }
 
         .login-container {
-            padding: 15px;
-            border-radius: 50px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 450px;
+    background: rgba(255, 255, 255, 0.15);           /* translucent white */
+    backdrop-filter: blur(10px);                      /* blur behind container */
+    -webkit-backdrop-filter: blur(10px);              /* Safari support */
+    padding: 40px 30px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);       /* subtle border */
+    color: #333;                                      /* text color remains dark */
+}
+.navbar a {
+    margin-left: 0; /* reset previous margin */
+    padding: 6px 15px;
+    border: 1.5px solid rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+.navbar a + a {
+    margin-left: 15px; /* spacing between links */
+}
+
+.navbar a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+}
+
+
+        .login-container h2 {
             text-align: center;
-            background: rgba(195, 240, 194, 0.8);
-            border: 7px solid #487557; 
-            display: flex; /* Added */
-            flex-direction: column; /* Added */
-            align-items: center; /* Added */
-        }
-
-        .overlay {
-            padding: 35px;
-            width: 100%; /* Changed */
-            max-width: 350px; /* Added */
-            text-align: center; /* Added */
-        }
-
-        .login-container h1 {
             margin-bottom: 25px;
-            color: #333;
+            font-weight: 600;
+            color: #4a007e;
         }
 
-        .login-container input {
-            width: 100%;
-            padding: 7px;
-            margin: 12px 0;
-            border: 5px solid #e0facf;
+        input[type="text"],
+        input[type="password"] {
+            width: 85%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1.5px solid #ccc;
             border-radius: 5px;
-            font-size: 16px;
-            box-sizing: border-box; /* Added */
+            font-size: 15px;
         }
 
-        .container {
+        .remember-me {
+            color: black;
+            font-size: medium;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            gap: 20px;
+            font-size: 14px;
+            margin-top: 10px;
         }
 
-        .images-container {
+        .remember-me label {
             display: flex;
-            flex-direction: column;
-            gap: 10px;
+            font-size: medium;
+            font-weight: 600;
+            align-items: center;
+            gap: 5px;
         }
 
-        .images-container img {
-            width: 100px; /* Adjust the size as needed */
-            height: auto;
-            border-radius: 5px;
-        }
-
-        h1 {
-            background-size: contain;
-            background-color: rgb(166, 229, 171);
-            text-align: center;
-            color: #ff7e5f;
-        }
-
-        .login-container button {
+        button {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
+            background-color: #1e90ff;
+            color: white;
             border: none;
             border-radius: 5px;
-            background-color: #ff7e5f;
-            color: #ffffff;
             font-size: 16px;
             cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .login-container button:hover {
-            background-color: #feb47b;
-        }
-
-        .login-container .footer {
             margin-top: 20px;
-            color: #888;
         }
 
-        .login-container .footer a {
-            color: #ff7e5f;
-            text-decoration: underline;
-        }
-
-        .login-container .footer a:visited {
-            color: #551a8b; /* Adjust the color to your preference */
-        }
-
-        .login-container .footer a:hover {
-            color:dodgerblue
-        }
-
-        .login-container .footer a:active {
-            color: rgb(255, 0, 0);
-        }
-
-        .content {
-            display: flex;
-            align-items: center;
-            justify-content: center;/* Aligns checkbox and forgot password link */
-            margin-top: 10px;
-            width: 100%;
-            max-width: 400px; /* Adjust as needed */
-        }
-
-        .checkbox {
-            display: flex;
-            align-items: center;
-        }
-
-        .checkbox label {
-            margin-left: 5px; /* Adds space between checkbox and label */
-        }
-        .login-container .pass-link a {
-            color: #551a8b;
-            text-decoration: underline;
-        }
-        .login-container .pass-link a:hover {
-            color:dodgerblue
-        }
-        .login-container .pass-link a:active {
-            color: rgb(255, 0, 0);
-        }
-        .pass-link {
-            margin-left: auto; /* Pushes the forgot password link to the right */
+        button:hover {
+            background-color: #0066cc;
         }
 
     </style>
 </head>
-<body background="/static/images (4).jfif">
-       <h1><marquee>WELCOME TO INTERNSPACE EXPLORER...✨✨✨<br><center>LOGIN PAGE</center></marquee></h1>
-    <div class="login-container">
-        <div class="overlay">
-            <h1>Login</h1>
+
+<body>
+
+    <div class="navbar">
+        <div><strong>InternSpace Explorer</strong></div>
+        <div class="nav-links-container">
+            <a href="/">Home</a>
+            <a href="/signup">Signup</a>
+        </div>
+        
+    </div>
+
+    <div class="login-wrapper">
+        <div class="login-container">
+            <h2>Login</h2>
+
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
-                <ul class="flash-messages">
+            <ul class="flash-messages">
                 {% for category, message in messages %}
-                    <li class="{{ category }}">{{ message }}</li>
+                <li class="{{ category }}">{{ message }}</li>
                 {% endfor %}
-                </ul>
+            </ul>
             {% endif %}
-        {% endwith %}
-        
-           <form method="POST" action="/login">
-                <input type="text" name="username" placeholder="username" required>
-                <input type="password" name="password" placeholder="password" required>
-                <div class="content">
-                    <div class="checkbox">
-                        <input type="checkbox" id="remember-me">
-                        <label for="remember-me">Remember Me</label>
-                    </div>
-                    <div class="pass-link">
-                        <a href="#">Forgot password?</a>
-                    </div>
+            {% endwith %}
+
+            <form method="POST" action="/login">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+
+                <div class="remember-me">
+                    <label><input type="checkbox" name="remember"> Remember me</label>
+                    <a href="#" style="color:black; font-size: medium; font-weight: 600;">Forgot password?</a>
                 </div>
-                <br>
-                <button type="submit">Submit</button>
+
+                <button type="submit">Login</button>
             </form>
-            <div class="footer">
-                <p>Don't have an account? <a href="/signup">Sign up</a></p>
-            </div>
+
         </div>
     </div>
+
 </body>
+
 </html>

@@ -179,6 +179,33 @@
             font-weight: 600;
             font-size: 14px;
         }
+
+        #password-requirements {
+    list-style: none;
+    padding: 0;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+#password-requirements li {
+    margin: 4px 0;
+}
+.valid {
+    color: rgb(21, 236, 21);
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.valid::before {
+    content: '✔️ ';
+}
+.invalid {
+    color: rgb(252, 24, 24);
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.invalid::before {
+    content: '❌ ';
+}
+
     </style>
 </head>
 
@@ -224,7 +251,16 @@
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                <ul id="password-requirements">
+                    <li id="length" class="invalid">At least 8 characters</li>
+                    <li id="uppercase" class="invalid">One uppercase letter</li>
+                    <li id="lowercase" class="invalid">One lowercase letter</li>
+                    <li id="number" class="invalid">One number</li>
+                    <li id="special" class="invalid">One special character (@$!%*?&)</li>
+                </ul>
+                
             </div>
+            
             <div class="form-group">
                 <label for="confirm_password">Confirm Password</label>
                 <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password"
@@ -237,7 +273,20 @@
             <button type="submit">Signup</button>
         </form>
     </div>
+    <script>
+        const passwordInput = document.getElementById('password');
 
+        passwordInput.addEventListener('input', () => {
+            const val = passwordInput.value;
+
+            document.getElementById('length').className = val.length >= 8 ? 'valid' : 'invalid';
+            document.getElementById('uppercase').className = /[A-Z]/.test(val) ? 'valid' : 'invalid';
+            document.getElementById('lowercase').className = /[a-z]/.test(val) ? 'valid' : 'invalid';
+            document.getElementById('number').className = /\d/.test(val) ? 'valid' : 'invalid';
+            document.getElementById('special').className = /[@$!%*?&]/.test(val) ? 'valid' : 'invalid';
+        });
+    </script>
+        
 </body>
 
 </html>

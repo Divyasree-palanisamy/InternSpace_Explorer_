@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, session, flash, url_for
 from flask import Flask, request, jsonify
 import mysql.connector
+import re
 from mysql.connector import connect, Error
 from datetime import timedelta
 from datetime import datetime  # ✅ Import this at the top
@@ -118,6 +119,11 @@ def login():
 
     return render_template('login.html')
 
+
+def is_strong_password(password):
+    # At least 8 characters, one uppercase, one lowercase, one number, one special char
+    return re.match(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$', password)
+
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
@@ -131,6 +137,8 @@ def signup():
             flash("All fields are required.", "error")
         elif password != confirm_password:
             flash("Passwords do not match.", "error")
+        elif not is_strong_password(password):
+            flash("Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, a number, and a special character.", "error")
         else:
             connection = get_db_connection()
             if connection:
@@ -152,6 +160,7 @@ def signup():
                     connection.close()
 
     return render_template('signup.html')
+
 
 @app.route('/add_internship', methods=['GET', 'POST'])
 def add_internship():

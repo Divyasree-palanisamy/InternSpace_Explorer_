@@ -18,7 +18,7 @@
             padding: 0;
             font-family: 'Segoe UI', sans-serif;
             background-color: #f0f4f8;
-            background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1920&q=80');
+            background: url("https://static.vecteezy.com/system/resources/previews/021/334/113/non_2x/pastel-blue-wavy-line-bubble-and-circle-elements-on-white-background-minimal-simple-and-clean-concept-used-for-background-backdrop-banner-wallpaper-copy-space-or-landing-page-vector.jpg") no-repeat center center fixed;
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
@@ -42,7 +42,7 @@
             margin: 0 10px;
             padding: 12px 25px;
             text-decoration: none;
-            background: linear-gradient(to right, #cc00ff, #9900cc);
+            background: linear-gradient(to right, #5787ef, #74a6f5);
             color: white;
             border-radius: 30px;
             font-size: 16px;
@@ -50,7 +50,7 @@
         }
 
         .navbar .button:hover {
-            background: #9900cc;
+            background: #5787ef;
             transform: scale(1.07);
         }
 
@@ -143,7 +143,36 @@
                 opacity: 1;
                 transform: translateY(0);
             }
-        }
+        }.logo-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(200, 220, 255, 0.5));
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px) saturate(180%);
+    animation: fadeInLogo 1.5s ease forwards;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.home-logo {
+    max-width: 150px;
+    height: auto;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 20px rgba(91, 141, 255, 0.6), 0 0 30px rgba(91, 141, 255, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.home-logo:hover {
+    transform: scale(1.05) rotate(2deg);
+}
+
+
     </style>
 </head>
 
@@ -154,8 +183,12 @@
     </div>
 
     <div class="home-container">
-        <h1>🌍 Welcome to InternSpace Explorer ✨</h1>
-        <h2>Your gateway to amazing internship opportunities worldwide.</h2>
+        <h1>Welcome to InternSpace Explorer ✨✨✨</h1>
+
+        <div class="logo-wrapper">
+            <img src="static/icon.png" alt="InternSpace Logo" class="home-logo" />
+        </div>
+                <h2>Your gateway to amazing internship opportunities worldwide.</h2>
         <p>
             Welcome to InternSpace, your ultimate destination for discovering internships across the globe! Whether you
             are a student looking to gain practical experience, a fresh graduate seeking to kickstart your career, or a

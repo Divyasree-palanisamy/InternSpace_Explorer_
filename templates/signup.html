@@ -9,7 +9,7 @@
             height: 100%;
             margin: 0;
             padding: 0;
-            background: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+            background: url("https://static.vecteezy.com/system/resources/previews/021/334/113/non_2x/pastel-blue-wavy-line-bubble-and-circle-elements-on-white-background-minimal-simple-and-clean-concept-used-for-background-backdrop-banner-wallpaper-copy-space-or-landing-page-vector.jpg") no-repeat center center fixed;
             background-size: cover;
             font-family: Arial, sans-serif;
             display: flex;
@@ -50,10 +50,13 @@
         .nav-links-container {
             display: flex;
             gap: 15px;
+            border-radius: 10px;
+            display: block;
         }
 
         .navbar a {
             color: white;
+            background-color: #6ac1f7;
             text-decoration: none;
             padding: 6px 15px;
             border: 1.5px solid rgba(255, 255, 255, 0.7);
@@ -72,19 +75,19 @@
             background-color: rgba(255, 255, 255, 0.15);
             padding: 30px 40px;
             border-radius: 20px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             width: 500px;
             max-width: 90vw;
             text-align: center;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(1px);
+            -webkit-backdrop-filter: blur(1px);
             box-sizing: border-box;
         }
 
         .signup-container h2 {
             margin-bottom: 30px;
             font-size: 26px;
-            color: #4a007e;
+            color: #58a7e7;
             font-weight: 600;
         }
 
@@ -106,34 +109,36 @@
         .form-group input {
             width: 100%;
             padding: 12px;
-            border: 1.5px solid #b39ddb;
+            border: 1.5px solid #9dbfdb;
             border-radius: 8px;
             font-size: 16px;
             transition: border-color 0.3s;
         }
 
         .form-group input:focus {
-            border-color: #7e57c2;
+            border-color: #578cc2;
             outline: none;
-            box-shadow: 0 0 8px rgba(126, 87, 194, 0.6);
+            box-shadow: 0 0 8px rgba(135, 194, 243, 0.6);
         }
 
         button {
-            width: 100%;
+            width: 50%;
             padding: 14px;
-            background-color: #7e57c2;
+            background-color: #6ac1f7;
             border: none;
-            border-radius: 10px;
+            border-radius: 30px;
             color: white;
             font-size: 20px;
+            left: 1000px;
             cursor: pointer;
             transition: background-color 0.3s;
             font-weight: 600;
             margin-top: 10px;
+            margin-left: auto;
         }
 
         button:hover {
-            background-color: #9c70e6;
+            background-color: #84bdec;
         }
 
         @media (max-width: 600px) {
@@ -205,6 +210,13 @@
 .invalid::before {
     content: '❌ ';
 }
+.nav-icon {
+    height: 30px;        /* Adjust size as needed */
+    width: 30px;
+    vertical-align: middle;
+    margin-right: 10px;   /* spacing between icon and text */
+    border-radius: 10px;
+}
 
     </style>
 </head>
@@ -214,7 +226,10 @@
     <!-- Navbar -->
     <div class="navbar">
         <div class="navbar-inner">
-            <div><strong>InternSpace Explorer</strong></div>
+            <div>
+                <img src="static/icon.png" alt="Icon" class="nav-icon">
+                <strong>InternSpace Explorer</strong>
+                </div>
             <div class="nav-links-container">
                 <a href="/">Home</a>
                 <a href="/login">Login</a>

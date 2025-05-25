@@ -107,10 +107,11 @@ def login():
             if user:
                 session['username'] = user['username']
                 session['user_id'] = user['id']
-                flash('Login successful!', 'success')
+                flash("✅ Login successful!", "success")
                 return redirect('/dashboard')
             else:
-                flash('Invalid credentials', 'error')
+                flash("❌ Invalid credentials", "error")
+
         except Error as e:
             print(f"Login error: {e}")
         finally:

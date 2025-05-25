@@ -147,12 +147,13 @@ def signup():
                 try:
                     cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
                     if cursor.fetchone():
-                        flash("Username already taken.", "error")
+                        flash(" ❌ Username already taken.", "error")
                     else:
                         cursor.execute("INSERT INTO users (username, email, phone_number, password) VALUES (%s, %s, %s, %s)", 
                                        (username, email, phone_number, password))
                         connection.commit()
-                        flash("Account created successfully!", "success")
+                        flash("✅ Account created successfully!", "success")
+
                         return redirect('/login')
                 except Error as err:
                     flash(f"Database error: {err}", "error")

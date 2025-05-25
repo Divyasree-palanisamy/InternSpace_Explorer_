@@ -147,38 +147,80 @@
             margin-bottom: 10px;
         }
 
-        .flash-messages .error {
-            color: #721c24;
-            background-color: #f8d7da;
-            border-color: #f5c6cb;
-        }
+       
+.flash-messages {
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
 
-        .flash-messages .success {
-            color: #155724;
-            background-color: #d4edda;
-            border-color: #c3e6cb;
-        }
+.flash-messages li {
+    position: relative;
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
 
-        .flashes {
-            list-style-type: none;
-            padding: 0;
-        }
+.flash-messages .success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 2px solid #c3e6cb;
+}
 
-        .flashes li {
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 5px;
-        }
+.flash-messages .error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 2px solid #f5c6cb;
+}
 
-        .flashes .success {
-            background-color: #d4edda;
-            color: #155724;
-        }
+/* ✅ Green line animation for success */
+.flash-messages .success::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 100%;
+    width: 100%;
+    height: 4px;
+    background-color: #28a745;
+    animation: slide-left 1.5s ease-out forwards;
+}
 
-        .flashes .error {
-            background-color: #f8d7da;
-            color: #721c24;
-        }
+@keyframes slide-left {
+    from {
+        left: 100%;
+    }
+    to {
+        left: 0%;
+    }
+}
+/* 🔴 Red line animation for error */
+.flash-messages .error::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 100%;
+    width: 100%;
+    height: 4px;
+    background-color: #dc3545;
+    animation: slide-left-red 1.5s ease-out forwards;
+}
+
+@keyframes slide-left-red {
+    from {
+        left: 100%;
+    }
+    to {
+        left: 0%;
+    }
+}
+
 
         .search-bar input[type="text"] {
             padding: 10px;
@@ -421,6 +463,15 @@
     </div>
 
     <script>
+
+setTimeout(() => {
+        const flashMessages = document.querySelector('.flash-messages');
+        if (flashMessages) {
+            flashMessages.style.opacity = '0';
+            flashMessages.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => flashMessages.remove(), 500); // remove from DOM after fade-out
+        }
+    }, 3000);
         
           // Function to toggle the visibility of the price range section
           function togglePriceRange() {

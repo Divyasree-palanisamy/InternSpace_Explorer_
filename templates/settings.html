@@ -3,194 +3,299 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Settings | Internship Finder</title>
     <style>
+        :root {
+            --primary-color: #0f172a;
+            /* dark blue-gray */
+            --accent-color: #38bdf8;
+            /* sky blue */
+            --hover-color: #60c2f8;
+            /* lighter blue */
+            --bg-glass: rgba(255, 255, 255, 0.1);
+            --text-color: #f1f5f9;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --btn-bg-color: #38bdf8;
+            --btn-hover-color: #60c2f8;
+            --back-link-bg: #88de47;
+            --back-link-hover: #3cb300;
+            --input-bg: #1e2a47;
+            --input-border: #304569;
+            --input-focus-bg: #22355f;
+        }
+
+        /* Reset & base */
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             padding: 0;
-            background-color: #f0f2f5;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #1b1f3b, #2e3c5d);
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             min-height: 100vh;
-            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
-            background-size: cover;
+            color: var(--text-color);
+            line-height: 1.6;
         }
 
         .settings-container {
+            background-color: var(--bg-glass);
+            color: var(--text-color);
+            backdrop-filter: blur(14px);
+            border-radius: 18px;
+            padding: 40px 50px;
+            box-shadow: var(--box-shadow);
             width: 90%;
             max-width: 900px;
-            background-color: #d2ddec;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            margin: 20px;
+            margin: 40px 20px;
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         h1 {
             text-align: center;
-            color: #111;
-            margin-bottom: 25px;
-            font-size: 2.5em;
+            color: light navy;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 40px;
+            text-shadow: 0 0 12px var(--accent-color);
+            letter-spacing: 1.5px;
         }
 
         .section {
-            margin-bottom: 30px;
+            margin-bottom: 36px;
+            background-color: rgba(15, 23, 42, 0.8);
+            padding: 28px 36px;
+            border-radius: 14px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+            transition: background-color 0.3s ease;
+        }
+
+        .section:hover {
+            background-color: rgba(15, 23, 42, 0.95);
         }
 
         .section h2 {
-            color: #3a7ca5;
-            font-size: 1.7em;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #3a7ca5;
-            padding-bottom: 8px;
+            color: var(--accent-color);
+            font-size: 2.1rem;
+            margin-bottom: 24px;
+            font-weight: 700;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 6px;
+            letter-spacing: 0.06em;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 22px;
             display: flex;
             flex-direction: column;
-        }
-
-        .form-group label {
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
             max-width: 500px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 1em;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-            transition: border-color 0.3s ease;
         }
 
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            border-color: #3a7ca5;
+        label {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        select,
+        input[type="url"],
+        textarea {
+            padding: 14px 18px;
+            font-size: 1rem;
+            border-radius: 12px;
+            border: 1.8px solid var(--input-border);
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.5);
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+            outline-offset: 2px;
+        }
+
+        select:focus,
+        input[type="url"]:focus,
+        textarea:focus {
+            border-color: var(--accent-color);
+            background-color: var(--input-focus-bg);
+            outline: none;
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+
+        button {
+            max-width: 200px;
+            padding: 14px 36px;
+            background-color: var(--btn-bg-color);
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: 0 5px 16px var(--btn-bg-color);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease,
+                transform 0.2s ease;
+            align-self: flex-start;
+        }
+
+        button:hover,
+        button:focus {
+            background-color: var(--btn-hover-color);
+            box-shadow: 0 8px 24px var(--btn-hover-color);
+            transform: scale(1.07);
             outline: none;
         }
 
-        .form-group button {
-            align-self: flex-start;
-            padding: 10px 22px;
-            background-color: #3a7ca5;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.05em;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        .form-group button:hover {
-            background-color: #6ea8cd;
-            transform: scale(1.03);
-        }
-
+        /* Back to dashboard link */
         .footer {
             text-align: center;
             margin-top: 30px;
-            font-size: 0.95em;
-            color: #666;
         }
 
         .footer a {
-            color: #3a7ca5;
+            display: inline-block;
+            background-color: var(--back-link-bg);
+            color: var(--primary-color);
+            font-weight: 700;
             text-decoration: none;
-            font-weight: 600;
+            padding: 14px 32px;
+            border-radius: 14px;
+            box-shadow: 0 5px 16px var(--back-link-bg);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            user-select: none;
         }
 
-        .footer a:hover {
-            text-decoration: underline;
+        .footer a:hover,
+        .footer a:focus {
+            background-color: var(--back-link-hover);
+            box-shadow: 0 8px 24px var(--back-link-hover);
+            outline: none;
         }
 
+        /* Responsive tweaks */
         @media (max-width: 600px) {
+            .settings-container {
+                padding: 30px 25px;
+            }
 
-            .form-group input,
-            .form-group select,
-            .form-group textarea {
+            .form-group {
                 max-width: 100%;
             }
 
             h1 {
-                font-size: 2em;
+                font-size: 2.4rem;
+                margin-bottom: 32px;
             }
 
             .section h2 {
-                font-size: 1.4em;
+                font-size: 1.7rem;
+                margin-bottom: 20px;
+            }
+
+            button,
+            .footer a {
+                width: 100%;
+                max-width: none;
+                padding: 14px;
+                text-align: center;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="settings-container">
+    <div class="settings-container" role="main" aria-label="User Settings">
         <h1>Settings</h1>
 
         <!-- Preferences Section -->
-        <div class="section">
-            <h2>Preferences</h2>
-            <form action="/update_preferences" method="POST">
+        <section class="section" aria-labelledby="preferences-heading">
+            <h2 id="preferences-heading">Preferences</h2>
+            <form action="/update_preferences" method="POST" novalidate>
                 <div class="form-group">
                     <label for="notifications">Notification Preferences</label>
-                    <select id="notifications" name="notifications">
+                    <select id="notifications" name="notifications" aria-describedby="notif-desc">
                         <option value="email">Email Notifications</option>
                         <option value="sms">SMS Notifications</option>
                         <option value="none">No Notifications</option>
                     </select>
+                    <small id="notif-desc" style="color: #aaccee; margin-top: 4px;">
+                        Choose how you'd like to receive updates.
+                    </small>
                 </div>
 
                 <div class="form-group">
                     <label for="theme">Theme</label>
-                    <select id="theme" name="theme">
+                    <select id="theme" name="theme" aria-describedby="theme-desc">
                         <option value="light">Light</option>
-                        <option value="dark">Dark</option>
+                        <option value="dark" selected>Dark</option>
                     </select>
+                    <small id="theme-desc" style="color: #aaccee; margin-top: 4px;">
+                        Select your preferred website theme.
+                    </small>
                 </div>
 
                 <div class="form-group">
-                    <button type="submit">Save Preferences</button>
+                    <button type="submit" aria-label="Save Preferences">Save Preferences</button>
                 </div>
             </form>
-        </div>
+        </section>
 
         <!-- Linked Accounts Section -->
-        <div class="section">
-            <h2>Linked Accounts</h2>
-            <form action="/manage_linked_accounts" method="POST">
+        <section class="section" aria-labelledby="linked-accounts-heading">
+            <h2 id="linked-accounts-heading">Linked Accounts</h2>
+            <form action="/manage_linked_accounts" method="POST" novalidate>
                 <div class="form-group">
-                    <label for="linkedin">LinkedIn</label>
-                    <input type="url" id="linkedin" name="linkedin"
-                        placeholder="https://linkedin.com/in/your-profile" />
+                    <label for="linkedin">LinkedIn Profile URL</label>
+                    <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/your-profile"
+                        aria-describedby="linkedin-desc" autocomplete="off" />
+                    <small id="linkedin-desc" style="color: #aaccee; margin-top: 4px;">
+                        Add your LinkedIn profile link.
+                    </small>
                 </div>
 
                 <div class="form-group">
-                    <label for="github">GitHub</label>
-                    <input type="url" id="github" name="github" placeholder="https://github.com/yourusername" />
+                    <label for="github">GitHub Profile URL</label>
+                    <input type="url" id="github" name="github" placeholder="https://github.com/yourusername"
+                        aria-describedby="github-desc" autocomplete="off" />
+                    <small id="github-desc" style="color: #aaccee; margin-top: 4px;">
+                        Add your GitHub profile link.
+                    </small>
                 </div>
 
                 <div class="form-group">
-                    <button type="submit">Update Linked Accounts</button>
+                    <button type="submit" aria-label="Update Linked Accounts">Update Linked Accounts</button>
                 </div>
             </form>
-        </div>
+        </section>
 
+        <!-- Back to Dashboard -->
         <div class="footer">
-            <p><a href="/dashboard">← Back to Dashboard</a></p>
+            <a href="/dashboard" aria-label="Back to Dashboard">← Back to Dashboard</a>
         </div>
     </div>
+
+    <script>
+        // Optional: add smooth expand/collapse for FAQ-like toggles if you add them later
+        // Right now the page has no toggles, but you could easily enhance by adding them later
+    </script>
 </body>
 
 </html>

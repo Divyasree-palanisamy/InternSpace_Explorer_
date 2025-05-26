@@ -5,120 +5,192 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Help - Internship Finder</title>
     <style>
-    body {
-    margin: 0;
-    padding: 0;
-    background-color: #f0f2f5;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
-}
-
-.settings-container {
-    width: 90%;
-    max-width: 900px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);
-    margin: 20px;
-}
-
-h1 {
-    text-align: center;
-    color: #0d0d0d;
-    margin-bottom: 25px;
-    font-size: 2.5em;
-}
-
-.section {
-    margin-bottom: 25px;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-    margin-top: 15px;
-}
-
-.section h2 {
-    color: #db3a3a;
-    font-size: 1.4em;
-    margin-bottom: 15px;
-    padding-bottom: 8px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-.form-group label {
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #555;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    max-width: 400px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1em;
-    margin-bottom: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: border-color 0.3s;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    border-color: #4CAF50;
-    outline: none;
-}
-
-.form-group button {
-    width: fit-content;
-    padding: 10px 20px;
-    background-color: #53679a;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1.1em;
-    transition: background-color 0.3s, transform 0.2s;
-    margin-top: 10px;
-}
-
-.form-group button:hover {
-    background-color: #45a049;
-    transform: scale(1.05);
-}
-
-.back-link a {
-    margin-top: 20px;
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #88de47;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: background-color 0.3s;
-}
-
-.back-link a:hover {
-    background-color: #3cb300;
-}
-
+        :root {
+            --primary-color: #0f172a;
+            /* dark blue-gray */
+            --accent-color: #38bdf8;
+            /* sky blue */
+            --hover-color: #60c2f8;
+            /* lighter blue */
+            --bg-glass: rgba(255, 255, 255, 0.1);
+            --text-color: #f1f5f9;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+    
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #1b1f3b, #2e3c5d);
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            color: var(--text-color);
+        }
+    
+        .help-container {
+            background-color: var(--bg-glass);
+            color: var(--text-color);
+            backdrop-filter: blur(12px);
+            border-radius: 15px;
+            padding: 30px 40px;
+            box-shadow: var(--box-shadow);
+            width: 90%;
+            max-width: 900px;
+            margin: 40px auto;
+        }
+    
+        h1 {
+            text-align: center;
+            color: light navy;
+            margin-bottom: 35px;
+            font-size: 3em;
+            font-weight: 700;
+            text-shadow: 0 0 8px var(--accent-color);
+        }
+    
+        .section {
+            margin-bottom: 30px;
+            background-color: rgba(15, 23, 42, 0.7);
+            padding: 25px 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+            transition: background-color 0.3s ease;
+        }
+    
+        .section:hover {
+            background-color: rgba(15, 23, 42, 0.85);
+        }
+    
+        .section h2 {
+            color: var(--accent-color);
+            font-size: 1.8em;
+            margin-bottom: 18px;
+            font-weight: 600;
+            /* No underline */
+        }
+    
+        .faq-item h4 {
+            cursor: pointer;
+            color: #a0c8f7;
+            font-weight: 600;
+            margin-bottom: 8px;
+            transition: color 0.3s ease;
+        }
+    
+        .faq-item h4:hover {
+            color: var(--hover-color);
+        }
+    
+        .faq-item p {
+            margin-left: 10px;
+            line-height: 1.5;
+            color: #d0d9e6;
+            display: none;
+            /* start hidden */
+        }
+    
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+    
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+    
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            max-width: 450px;
+            padding: 12px 15px;
+            border: 1.5px solid #304569;
+            border-radius: 10px;
+            font-size: 1em;
+            background-color: #1e2a47;
+            color: var(--text-color);
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.4);
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+    
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent-color);
+            outline: none;
+            background-color: #22355f;
+        }
+    
+        .form-group button {
+            width: fit-content;
+            padding: 12px 28px;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.15em;
+            font-weight: 700;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 15px;
+            box-shadow: 0 4px 12px var(--accent-color);
+        }
+    
+        .form-group button:hover {
+            background-color: var(--hover-color);
+            transform: scale(1.05);
+            box-shadow: 0 6px 18px var(--hover-color);
+        }
+    
+        .back-link a {
+            margin-top: 25px;
+            display: inline-block;
+            padding: 12px 28px;
+            background-color: #88de47;
+            color: #0f172a;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            /* no underline */
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 12px #88de47aa;
+        }
+    
+        .back-link a:hover {
+            background-color: #3cb300;
+            box-shadow: 0 6px 18px #3cb300aa;
+        }
+    
+        /* Support image styling */
+        .section img {
+            max-width: 110px;
+            height: auto;
+            margin-top: 18px;
+            filter: drop-shadow(0 0 4px var(--accent-color));
+        }
+    
+        /* Show FAQ answers when active */
+        .faq-item.active p {
+            display: block;
+        }
     </style>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var faqs = document.querySelectorAll('.faq-item h4');
+            faqs.forEach(function (faq) {
+                faq.addEventListener('click', function () {
+                    this.parentElement.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+        
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var faqs = document.querySelectorAll('.faq h4');
@@ -214,7 +286,7 @@ h1 {
             <p>If you need further assistance, please reach out to our support team. We're here to help you with any issues or questions you might have.</p>
             <p>Email: <a href="mailto:support@internshipfinder.com">support@internshipfinder.com</a></p>
             <p>Phone: +1 (555) 123-4567</p>
-            <img src="/static/support.jpg" alt="Support Image">
+            <img src="https://cdn-icons-png.flaticon.com/512/5977/5977575.png" alt="Support Image" style="max-width: 100px; height: auto; margin-top: 15px;">
         </div>
         <!-- Contact Form with File Upload -->
 <div class="section">

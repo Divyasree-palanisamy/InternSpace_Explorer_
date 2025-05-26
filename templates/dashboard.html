@@ -1,297 +1,339 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <style>
         /* Your existing CSS styles */
-        body, html {
+        /* Reset and base styles */
+        body,
+        html {
             margin: 0;
             padding: 0;
             height: 100%;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
             display: grid;
-            
         }
 
+        /* Dashboard container - grid layout */
         .dashboard-container {
             display: grid;
-            grid-template-columns: 200px 1fr; /* Ensure sidebar and main content layout */
-            background-color: #f5f5f5; /* Set background color for the whole page */
-            height: 100vh; /* Extend the height of the container to fill the viewport */
+            grid-template-columns: 220px 1fr;
+            height: 100vh;
+            background-color: #ffffff;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.05);
         }
 
+        /* Sidebar styling */
         .sidebar {
-            width: 200px;
-            background-color: #333;
+            background: linear-gradient(180deg, #8c86f6 0%, #6053e7 100%);
             color: #fff;
+            padding: 25px 20px;
             display: flex;
             flex-direction: column;
-            align-items: normal;
-            padding: 20px;
+            gap: 30px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            font-weight: 600;
+            border-radius: 0 15px 15px 0;
         }
 
         .sidebar h2 {
-            margin-bottom: 20px;
+            font-size: 1.8rem;
+            letter-spacing: 1.2px;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-align: center;
+            user-select: none;
         }
 
         .sidebar ul {
             list-style: none;
             padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
         .sidebar ul li {
-            margin: 10px 0;
-            background-color: rgb(103, 110, 141);
-            width: 150px;
-            color: brown;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.15);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar ul li:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateX(5px);
         }
 
         .sidebar ul li a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #e0e7ff;
+            font-weight: 600;
+            padding: 12px 20px;
             text-decoration: none;
-            color: #fcfafa;
-            display: block;
-            padding: 10px;
-            border-radius: 5px;
+            transition: color 0.3s ease;
+            border-radius: 8px;
         }
 
         .sidebar ul li a:hover {
-            background-color: #555;
+            color: #fff;
+            text-shadow: 0 0 8px #a5b4fc;
         }
 
+        /* Main content styling */
         .main-content {
-            flex: 1;
-            padding: 20px;
-            background: #f5f5f5;
-            
-    background-color: #e8f0fe;
-
-            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
-
+            padding: 30px 40px;
+            background: #f9fbff;
+            overflow-y: auto;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.02);
+            border-radius: 15px;
         }
 
+        /* Welcome container */
+        .welcome-container {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            background: #eef2ff;
+            border-left: 8px solid #4f46e5;
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(79, 70, 229, 0.15);
+            margin-bottom: 35px;
+        }
+
+        .welcome-icon {
+            width: 90px;
+            height: 90px;
+            filter: drop-shadow(0 0 3px #4f46e5);
+            user-select: none;
+        }
+
+        .welcome-text h2 {
+            margin: 0;
+            font-size: 28px;
+            color: #3b366a;
+            font-weight: 700;
+        }
+
+        .welcome-text p {
+            margin: 8px 0 0;
+            color: #5a5f7d;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        /* Form sections */
         .form-section {
-            padding: 20px;
-            background-color: #fdfdfd;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            background-color: #fff;
+            padding: 25px 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 35px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .form-section:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .form-section h3 {
+            font-weight: 700;
             margin-bottom: 20px;
+            color: #4338ca;
+            letter-spacing: 0.5px;
         }
 
-        .additional-info {
-            display: none; /* Hide additional info sections by default */
+        /* Form labels and inputs */
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #555785;
         }
 
-        .filter-details {
-            display: grid;
-            grid-gap: 20px;
-            grid-template-columns: repeat(2, 1fr); /* Adjust grid columns as needed */
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1.8px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            outline-offset: 2px;
         }
 
-        .col {
-            margin-bottom: 10px;
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        input[type="date"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            border-color: #4f46e5;
+            box-shadow: 0 0 8px #a5b4fc;
+            outline: none;
         }
 
-        .col label {
-            margin-bottom: 5px;
+        /* Inline form groups */
+        .form-group-inline {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-top: 15px;
         }
 
-        /* Modal styles */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        .form-group-inline label {
+            margin-bottom: 0;
+            color: #555785;
+            font-weight: 600;
         }
 
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%; /* Could be more or less, depending on screen size */
-            text-align: center;
-        }
-
+        /* Buttons */
         button {
-            margin: 10px;
-            padding: 10px 20px;
-            border: none;
-            background-color: #007bff;
+            background-color: #4f46e5;
             color: white;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 16px;
             cursor: pointer;
-            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
+            transition: background-color 0.35s ease, box-shadow 0.35s ease;
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color: #4338ca;
+            box-shadow: 0 8px 20px rgba(67, 56, 202, 0.45);
         }
 
-        .col input,
-        .col select {
-            padding: 10px;
+        .flash-messages li {
+            position: relative;
+            padding: 18px 24px;
+            border-radius: 12px;
+            font-size: 17px;
+            margin-bottom: 22px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+            overflow: hidden;
+            user-select: none;
+            letter-spacing: 0.6px;
+            font-weight: 700;
+        }
+
+        .flash-messages .success {
+            background-color: #d1fae5;
+            color: #065f46;
+            border: 2.5px solid #10b981;
+        }
+
+        .flash-messages .error {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 2.5px solid #ef4444;
+        }
+
+        .flash-messages .success::after,
+        .flash-messages .error::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 100%;
             width: 100%;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            height: 5px;
+            animation: slide-left 1.5s ease-out forwards;
         }
 
+        .flash-messages .success::after {
+            background-color: #10b981;
+        }
+
+        .flash-messages .error::after {
+            background-color: #ef4444;
+        }
+
+        @keyframes slide-left {
+            from {
+                left: 100%;
+            }
+
+            to {
+                left: 0%;
+            }
+        }
+
+        /* Search bar styling */
         .search-bar {
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
+            gap: 15px;
+            margin-bottom: 25px;
         }
 
-       
-.flash-messages {
-    list-style: none;
-    padding: 0;
-    margin: 20px auto;
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
-}
-
-.flash-messages li {
-    position: relative;
-    padding: 16px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    font-weight: bold;
-    font-size: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-}
-
-.flash-messages .success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 2px solid #c3e6cb;
-}
-
-.flash-messages .error {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 2px solid #f5c6cb;
-}
-
-/* ✅ Green line animation for success */
-.flash-messages .success::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 100%;
-    width: 100%;
-    height: 4px;
-    background-color: #28a745;
-    animation: slide-left 1.5s ease-out forwards;
-}
-
-@keyframes slide-left {
-    from {
-        left: 100%;
-    }
-    to {
-        left: 0%;
-    }
-}
-/* 🔴 Red line animation for error */
-.flash-messages .error::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 100%;
-    width: 100%;
-    height: 4px;
-    background-color: #dc3545;
-    animation: slide-left-red 1.5s ease-out forwards;
-}
-
-@keyframes slide-left-red {
-    from {
-        left: 100%;
-    }
-    to {
-        left: 0%;
-    }
-}
-
-
         .search-bar input[type="text"] {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            margin-right: 5px;
-            width: 200px;
+            flex-grow: 1;
+            padding: 12px 18px;
+            border-radius: 10px;
+            border: 1.8px solid #cbd5e1;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-bar input[type="text"]:focus {
+            border-color: #4f46e5;
+            box-shadow: 0 0 10px #a5b4fc;
+            outline: none;
         }
 
         .search-bar button {
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            padding: 12px 26px;
+            border-radius: 10px;
+            font-weight: 700;
         }
 
-        .hidden {
-            display: none;
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                flex-direction: row;
+                justify-content: space-around;
+                padding: 15px;
+                border-radius: 0 0 15px 15px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .hidden {
+                display: none;
+            }
+
+            .sidebar h2 {
+                display: none;
+            }
+
+            .main-content {
+                padding: 25px 20px;
+                border-radius: 0 0 15px 15px;
+            }
         }
-        .welcome-container {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    background-color: #e8f0fe;
-    border-left: 6px solid #4285f4;
-    padding: 20px;
-    border-radius: 10px;
-    margin: 20px 0;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}
-
-.welcome-icon {
-    width: 80px;
-    height: 80px;
-}
-
-.welcome-text h2 {
-    margin: 0;
-    font-size: 24px;
-    color: #2b2d42;
-}
-
-.welcome-text p {
-    margin: 5px 0;
-    color: #4a4a4a;
-    font-size: 16px;
-}
-/* Container for the whole form */
-.form-container {
-  max-width: 700px; /* reduce this to make it narrower */
-  margin: 0 auto; /* centers the form */
-  padding: 20px;
-  background-color: #a197dc;
-  border-radius: 10px;
-}
-
-/* Apply to individual inputs to restrict width */
-.form-group-inline input,
-.form-group-inline select {
-  max-width: 128px; /* limit width */
-  width: 100%; /* responsive */
-  padding: 5px;
-  margin-right: 20px;
-}
-
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-</head> 
+</head>
+
 <body>
     <div class="dashboard-container">
         <div class="sidebar">
@@ -303,73 +345,76 @@
                 <li><b><a href="/logout_confirmation"><i class="fas fa-sign-out-alt"></i> Logout</a></b></li>
             </ul>
         </div>
-        
-       
+
+
         <div class="main-content">
             <!-- Username Display -->
             {% with messages = get_flashed_messages(with_categories=True) %}
             {% if messages %}
-                <div class="flash-messages">
-                    <ul>
-                        {% for category, message in messages %}
-                            <li class="{{ category }}">{{ message }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
+            <div class="flash-messages">
+                <ul>
+                    {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
             {% endif %}
             {% endwith %}
             <div class="welcome-container">
-                <img src="https://cdn-icons-png.flaticon.com/512/5790/5790327.png" alt="Career Growth Icon" class="welcome-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/5790/5790327.png" alt="Career Growth Icon"
+                    class="welcome-icon">
                 <div class="welcome-text">
                     <h2>Welcome, {{ username }}! 🎉🎉🎉</h2>
                     <p>We're glad to see you back. Let’s make today productive and successful!</p>
-                    <p><em><b>“Success is the sum of small efforts, repeated day in and day out.” – R. Collier</b></em></p>
+                    <p><em><b>“Success is the sum of small efforts, repeated day in and day out.” – R. Collier</b></em>
+                    </p>
                 </div>
             </div>
-            
+
             <!-- User Info Form -->
             <div class="form-section" id="userInfoSection">
                 <h3>Student Information</h3>
                 {% if info_exists %}
-                    <h2>Welcome back, {{ username }}!</h2>
-                    <!-- Display other dashboard content here -->
+                <h2>Welcome back, {{ username }}!</h2>
+                <!-- Display other dashboard content here -->
                 {% else %}
-                    <!-- User info form -->
-                    <form id="studentInfoForm" action="/submit_details" method="post">
-                        <label for="name">Name:</label>
-                        <input type="text" id="name" name="name" required>
-                    
-                        <label for="dob">Date of Birth:</label>
-                        <input type="date" id="dob" name="dob" required>
-                    
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" required>
-                    
-                        <label for="phone">Phone Number:</label>
-                        <input type="tel" id="phone" name="phone" required>
-                        <div class="form-group-inline">
-                            <label>Role:</label>
-                            <select>
-                                <option>Professional</option>
-                                <option>Student</option>
-                            </select>                
-                        </div>
-                          
-                
-                    <br><center>
+                <!-- User info form -->
+                <form id="studentInfoForm" action="/submit_details" method="post">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="dob">Date of Birth:</label>
+                    <input type="date" id="dob" name="dob" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                    <div class="form-group-inline">
+                        <label>Role:</label>
+                        <select>
+                            <option>Professional</option>
+                            <option>Student</option>
+                        </select>
+                    </div>
+
+
+                    <br>
+                    <center>
                         <button type="submit" style="background-color:#53679a;">Submit</button>
                     </center>
-                    </form>
+                </form>
                 {% endif %}
                 {% if message %}
-                    <p>{{ message }}</p>
+                <p>{{ message }}</p>
                 {% endif %}
-                <div id="successMessage" class="flash-messages success hidden">Thank you for your registration!</div>
             </div>
             <hr>
 
             <!-- Internship Preferences Form -->
-            <br><form id="filterForm" action="/filter_internships" method="POST">
+            <br>
+            <form id="filterForm" action="/filter_internships" method="POST">
                 <div class="filter-details">
                     <div class="col">
                         <label for="filterKeyword">Field:</label>
@@ -385,31 +430,38 @@
                     </div>
                     <div class="col">
                         <label for="filterDepartment">Department:</label>
-                        <input type="text" id="filterDepartment" name="filterDepartment" placeholder="Department (e.g., Computer Science)" required>
+                        <input type="text" id="filterDepartment" name="filterDepartment"
+                            placeholder="Department (e.g., Computer Science)" required>
                     </div>
                     <div class="col">
                         <label for="filterDomain">Domain:</label>
-                        <input type="text" id="filterDomain" name="filterDomain" placeholder="Domain (e.g., Web Development, AI)" required>
+                        <input type="text" id="filterDomain" name="filterDomain"
+                            placeholder="Domain (e.g., Web Development, AI)" required>
                     </div>
                     <div class="col">
                         <label for="filterCountry">Country:</label>
-                        <input type="text" id="filterCountry" name="filterCountry" placeholder="Country (e.g., India)" required>
+                        <input type="text" id="filterCountry" name="filterCountry" placeholder="Country (e.g., India)"
+                            required>
                     </div>
                     <div class="col">
                         <label for="filterState">State:</label>
-                        <input type="text" id="filterState" name="filterState" placeholder="State/Province (e.g., Maharashtra)" required>
+                        <input type="text" id="filterState" name="filterState"
+                            placeholder="State/Province (e.g., Maharashtra)" required>
                     </div>
                     <div class="col">
                         <label for="filterDistrict">District:</label>
-                        <input type="text" id="filterDistrict" name="filterDistrict" placeholder="District/Region (e.g., Mumbai Suburban)" required>
+                        <input type="text" id="filterDistrict" name="filterDistrict"
+                            placeholder="District/Region (e.g., Mumbai Suburban)" required>
                     </div>
                     <div class="col">
                         <label for="filterCity">City:</label>
-                        <input type="text" id="filterCity" name="filterCity" placeholder="City/Town (e.g., Mumbai)" required>
+                        <input type="text" id="filterCity" name="filterCity" placeholder="City/Town (e.g., Mumbai)"
+                            required>
                     </div>
                     <div class="col">
                         <label for="filterDuration">Training Duration:</label>
-                        <input type="number" id="filterDuration" name="filterDuration" placeholder="Duration (in months)" required>
+                        <input type="number" id="filterDuration" name="filterDuration"
+                            placeholder="Duration (in months)" required>
                     </div>
                     <div class="col">
                         <label for="filterStartDate">Start Date:</label>
@@ -421,7 +473,8 @@
                     </div>
                     <div class="col">
                         <label for="trainingDuration">Day Duration:</label>
-                        <input type="number" id="trainingDuration" name="trainingDuration" placeholder="Training Duration (in hours)" required>
+                        <input type="number" id="trainingDuration" name="trainingDuration"
+                            placeholder="Training Duration (in hours)" required>
                     </div>
                     <div class="col">
                         <label for="filterType">Type:</label>
@@ -441,83 +494,39 @@
                             <option value="50000-100000">50,000 - 100,000</option>
                         </select>
                     </div>
-                </div>
+                </div><br>
                 <button type="submit" style="background-color: #53679a;">Filter</button>
             </form>
-            
-               
-                    <!-- Add any additional information display here -->
-                </div>
-            </div>
+
+
+            <!-- Add any additional information display here -->
         </div>
+    </div>
+    </div>
     </div>
 
-    <!-- Modal -->
-    <div id="logoutModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>Are you sure you want to log out?</p>
-            <button id="confirmLogout">Logout</button>
-            <button id="cancelLogout">Cancel</button>
-        </div>
-    </div>
 
     <script>
+      
 
-setTimeout(() => {
-        const flashMessages = document.querySelector('.flash-messages');
-        if (flashMessages) {
-            flashMessages.style.opacity = '0';
-            flashMessages.style.transition = 'opacity 0.5s ease';
-            setTimeout(() => flashMessages.remove(), 500); // remove from DOM after fade-out
-        }
-    }, 3000);
-        
-          // Function to toggle the visibility of the price range section
-          function togglePriceRange() {
-            const filterType = document.getElementById('filterType').value;
-            const priceRangeSection = document.getElementById('priceRangeSection');
-
-            if (filterType === 'paid') {
-                priceRangeSection.classList.remove('hidden');
-            } else {
-                priceRangeSection.classList.add('hidden');
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const studentInfoForm = document.getElementById("studentInfoForm");
             const filterSection = document.getElementById("filterSection");
-            const showFilterButton = document.getElementById("showFilterButton");
             const successMessage = document.getElementById("successMessage");
 
-            // Handle form submission
-            studentInfoForm.addEventListener("submit", function(event) {
-                event.preventDefault();
-                successMessage.classList.remove("hidden"); // Show success message
-                setTimeout(() => {
-                    successMessage.classList.add("hidden"); // Hide success message after a few seconds
-                }, 3000);
-                filterSection.classList.remove("hidden"); // Show filter section
-                // Optionally clear the form fields here
-            });
-
-            // Show filter section when button is clicked
-            showFilterButton.addEventListener("click", function() {
-                filterSection.classList.toggle("hidden");
-            });
-        });
-         function togglePriceRange() {
-            const filterType = document.getElementById('filterType').value;
-            const priceRangeSection = document.getElementById('priceRangeSection');
-
-            if (filterType === 'paid') {
-                priceRangeSection.classList.remove('hidden');
-            } else {
-                priceRangeSection.classList.add('hidden');
+            if (studentInfoForm) {
+                studentInfoForm.addEventListener("submit", function (event) {
+                    successMessage.classList.remove("hidden");
+                    setTimeout(() => {
+                        successMessage.classList.add("hidden");
+                    }, 3000);
+                    if (filterSection) {
+                        filterSection.classList.remove("hidden");
+                    }
+                });
             }
-        }
-
+        });
     </script>
 </body>
+
 </html>

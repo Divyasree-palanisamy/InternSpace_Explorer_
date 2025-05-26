@@ -1,21 +1,22 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings Internship Finder</title>
-            <style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings | Internship Finder</title>
+    <style>
         body {
             margin: 0;
             padding: 0;
             background-color: #f0f2f5;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+            background-size: cover;
         }
 
         .settings-container {
@@ -31,20 +32,20 @@
 
         h1 {
             text-align: center;
-            color: #111111;
+            color: #111;
             margin-bottom: 25px;
             font-size: 2.5em;
         }
 
         .section {
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
         .section h2 {
-            color: #589cbe;
-            font-size: 1.8em;
+            color: #3a7ca5;
+            font-size: 1.7em;
             margin-bottom: 15px;
-            border-bottom: 2px solid #589cbe;
+            border-bottom: 2px solid #3a7ca5;
             padding-bottom: 8px;
         }
 
@@ -57,69 +58,87 @@
         .form-group label {
             margin-bottom: 8px;
             font-weight: bold;
-            color: #555;
+            color: #333;
         }
 
         .form-group input,
         .form-group select,
         .form-group textarea {
             width: 100%;
-            max-width: 400px;
+            max-width: 500px;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 8px;
             font-size: 1em;
             margin-bottom: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: border-color 0.3s;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s ease;
         }
 
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
-            border-color: #4CAF50;
+            border-color: #3a7ca5;
             outline: none;
         }
 
         .form-group button {
-            width: fit-content;
-            padding: 10px 20px;
-            background-color: #53679a;
-
+            align-self: flex-start;
+            padding: 10px 22px;
+            background-color: #3a7ca5;
             color: #fff;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 1.1em;
+            font-size: 1.05em;
             transition: background-color 0.3s, transform 0.2s;
-            margin-top: 10px;
         }
 
         .form-group button:hover {
-            background-color: #859dd4;
-            transform: scale(1.05);
+            background-color: #6ea8cd;
+            transform: scale(1.03);
         }
 
         .footer {
             text-align: center;
-            margin-top: 25px;
-            color: #888;
+            margin-top: 30px;
+            font-size: 0.95em;
+            color: #666;
         }
 
         .footer a {
-            color: #4CAF50;
+            color: #3a7ca5;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 600;
         }
 
         .footer a:hover {
             text-decoration: underline;
         }
+
+        @media (max-width: 600px) {
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                max-width: 100%;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .section h2 {
+                font-size: 1.4em;
+            }
+        }
     </style>
 </head>
-<body background="/static/i3.jpeg">
+
+<body>
     <div class="settings-container">
         <h1>Settings</h1>
+
         <!-- Preferences Section -->
         <div class="section">
             <h2>Preferences</h2>
@@ -132,6 +151,7 @@
                         <option value="none">No Notifications</option>
                     </select>
                 </div>
+
                 <div class="form-group">
                     <label for="theme">Theme</label>
                     <select id="theme" name="theme">
@@ -139,35 +159,38 @@
                         <option value="dark">Dark</option>
                     </select>
                 </div>
+
                 <div class="form-group">
                     <button type="submit">Save Preferences</button>
                 </div>
             </form>
         </div>
-        
+
         <!-- Linked Accounts Section -->
         <div class="section">
             <h2>Linked Accounts</h2>
             <form action="/manage_linked_accounts" method="POST">
                 <div class="form-group">
                     <label for="linkedin">LinkedIn</label>
-                    <input type="text" id="linkedin" name="linkedin" placeholder="LinkedIn profile URL">
+                    <input type="url" id="linkedin" name="linkedin"
+                        placeholder="https://linkedin.com/in/your-profile" />
                 </div>
+
                 <div class="form-group">
                     <label for="github">GitHub</label>
-                    <input type="text" id="github" name="github" placeholder="GitHub profile URL">
+                    <input type="url" id="github" name="github" placeholder="https://github.com/yourusername" />
                 </div>
+
                 <div class="form-group">
                     <button type="submit">Update Linked Accounts</button>
                 </div>
             </form>
         </div>
 
-        
-        
         <div class="footer">
-            <p><a href="/dashboard">Back to Dashboard</a></p>
+            <p><a href="/dashboard">← Back to Dashboard</a></p>
         </div>
     </div>
 </body>
+
 </html>

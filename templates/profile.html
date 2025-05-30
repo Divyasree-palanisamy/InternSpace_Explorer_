@@ -181,7 +181,27 @@
             transition: background-color 0.3s ease, box-shadow 0.3s ease;
             user-select: none;
         }
-    
+        .avatar-container {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.avatar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
         .footer a:hover,
         .footer a:focus {
             background-color: var(--back-link-hover);
@@ -226,14 +246,27 @@
         <h1>User Profile</h1>
         <img src="{{ session.get('avatar_url', url_for('static', filename='default-profile.png')) }}" alt="Profile Picture"
             class="profile-pic">
-        <div class="avatar-container">
-            <img src="https://i.pravatar.cc/80?img=1" class="avatar" onclick="selectAvatar(this)">
-            <img src="https://i.pravatar.cc/80?img=2" class="avatar" onclick="selectAvatar(this)">
-            <img src="https://i.pravatar.cc/80?img=13" class="avatar" onclick="selectAvatar(this)">
-            <img src="https://i.pravatar.cc/80?img=4" class="avatar" onclick="selectAvatar(this)">
-            <img src="https://i.pravatar.cc/80?img=5" class="avatar" onclick="selectAvatar(this)">
-            <img src="https://i.pravatar.cc/80?img=10" class="avatar" onclick="selectAvatar(this)">
+            <div class="avatar-container">
+                <img src="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Brown&facialHairType=BeardLight&facialHairColor=Brown&clotheType=BlazerShirt&eyeType=Happy&eyebrowType=Default&mouthType=Smile&skinColor=Light"
+                    class="avatar" onclick="selectAvatar(this)">
+            
+                <img src="https://avataaars.io/?avatarStyle=Circle&topType=LongHairStraight&accessoriesType=Blank&hairColor=Black&facialHairType=Blank&clotheType=ShirtVNeck&clotheColor=Blue03&eyeType=Default&eyebrowType=Default&mouthType=Default&skinColor=Light"
+                    class="avatar" onclick="selectAvatar(this)">
+            
+                <img src="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairDreads01&accessoriesType=Round&hairColor=Black&facialHairType=BeardMajestic&facialHairColor=Black&clotheType=CollarSweater&eyeType=Default&eyebrowType=RaisedExcited&mouthType=Smile&skinColor=Brown"
+                    class="avatar" onclick="selectAvatar(this)">
+            
+                <img src="https://avataaars.io/?avatarStyle=Circle&topType=Hijab&accessoriesType=Blank&clotheType=ShirtCrewNeck&clotheColor=Gray01&eyeType=Default&eyebrowType=Default&mouthType=Smile&skinColor=Light"
+                    class="avatar" onclick="selectAvatar(this)">
+            
+                <img src="https://avataaars.io/?avatarStyle=Circle&topType=Eyepatch&accessoriesType=Blank&clotheType=GraphicShirt&clotheColor=Red&eyeType=Squint&eyebrowType=Angry&mouthType=Smile&skinColor=DarkBrown"
+                    class="avatar" onclick="selectAvatar(this)">
+            
+                <img src="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairSides&accessoriesType=Wayfarers&hairColor=BrownDark&facialHairType=Blank&clotheType=Hoodie&clotheColor=PastelBlue&eyeType=Default&eyebrowType=FlatNatural&mouthType=Default&skinColor=Light"
+                    class="avatar" onclick="selectAvatar(this)">
+              
         </div>
+              
         <label class="avatar upload-avatar">
             <span>+</span>
             <input type="file" accept="image/*" onchange="uploadCustomAvatar(event)">

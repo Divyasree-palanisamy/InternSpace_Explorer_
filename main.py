@@ -215,7 +215,9 @@ def add_internship():
 
     return render_template('add_internship.html')
 
-
+@app.route('/tutorial', methods=['GET', 'POST'])
+def tutorial():
+    return render_template('tutorial.html')
 
 @app.route('/view_internship')
 def view_internship():

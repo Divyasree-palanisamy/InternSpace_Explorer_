@@ -307,11 +307,52 @@
             font-weight: 700;
         }
 
+        .dashboard-footer {
+    background: linear-gradient(90deg, #4f46e5, #6366f1);
+    color: #fff;
+    text-align: center;
+    padding: 18px 0;
+    font-size: 15px;
+    font-weight: 500;
+    position: relative;
+    width: 100%;
+    box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.08);
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    transition: background 0.4s ease;
+}
+
+@media (max-width: 900px) {
+    .dashboard-footer {
+        font-size: 14px;
+        padding: 14px 0;
+    }
+}
+.dashboard-footer:hover {
+    box-shadow: 0 0 12px #a5b4fc;
+    transform: scale(1.01);
+}
+
         /* Responsive adjustments */
         @media (max-width: 900px) {
             .dashboard-container {
                 grid-template-columns: 1fr;
             }
+            .dashboard-footer:hover {
+    box-shadow: 0 0 12px #a5b4fc;
+    transform: scale(1.01);
+}
+
+.footer-tagline {
+    font-size: 13px;
+    color: #e0e7ff;
+    animation: fadeInTagline 2s ease-in;
+}
+
+@keyframes fadeInTagline {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
             .sidebar {
                 flex-direction: row;
@@ -324,10 +365,19 @@
             .hidden {
                 display: none;
             }
-
-            .sidebar h2 {
-                display: none;
-            }
+            .dashboard-heading {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    color: #1f2937;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
 
             .main-content {
                 padding: 25px 20px;
@@ -342,7 +392,7 @@
 <body>
     <div class="dashboard-container">
         <div class="sidebar">
-            <h2>Dashboard</h2>
+            <h2 class="dashboard-heading">Dashboard</h2>
             <ul>
                 <li><b><a href="/tutorial"><i class="fas fa-video"></i> Tutorial</a></b></li><br>
                 <li><b><a href="/profile"><i class="fas fa-user"></i> Profile</a></b></li><br>
@@ -503,8 +553,13 @@
                 </div><br>
                 <button type="submit" style="background-color: #53679a;">Filter</button>
             </form>
+<br>
+<footer class="dashboard-footer">
+    <p>&copy; 2025 Internship Finder Portal. All rights reserved.</p>
+    <p class="footer-tagline">Empowering students through opportunities 💼</p>
+</footer>
 
-
+            
             <!-- Add any additional information display here -->
         </div>
     </div>

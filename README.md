@@ -20,7 +20,7 @@ A comprehensive web application designed to help students discover and apply for
 
 - **Backend**: Python Flask
 - **Frontend**: HTML5, CSS3, JavaScript
-- **Database**: SQLite/MySQL
+- **Database**: MySQL WorkBench 8.0
 - **Styling**: Custom CSS with modern design patterns
 - **Icons**: Font Awesome
 
@@ -29,17 +29,6 @@ A comprehensive web application designed to help students discover and apply for
 ### Prerequisites
 - Python 3.7+
 - pip package manager
-
-## 📱 Screenshots
-
-### Dashboard
-![Dashboard](screenshots/dashboard.png)
-
-### Login Page
-![Login](screenshots/login.png)
-
-### Internship Filter
-![Filter](screenshots/filter.png)
 
 ## 🎨 Key Features Explained
 

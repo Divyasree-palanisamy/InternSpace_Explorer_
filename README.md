@@ -58,18 +58,3 @@ DEBUG=True
 
 ### Database Setup
 The application uses SQLite by default. For production, consider using MySQL or PostgreSQL.
-
-## 📁 Project Structure
-internSpace Explorer/
-├── templates/
-│ ├── dashboard.html
-│ ├── login.html
-│ ├── logout_confirmation.html
-│ └── other_templates.html
-├── static/
-│ ├── css/
-│ ├── js/
-│ └── images/
-├── app.py
-├── requirements.txt
-└── README.md

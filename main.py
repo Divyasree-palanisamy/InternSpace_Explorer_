@@ -4,14 +4,13 @@ import mysql.connector
 import re
 from mysql.connector import connect, Error
 from datetime import timedelta
-from datetime import datetime  # ✅ Import this at the top
+from datetime import datetime  
 
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)
 
-# Database connection function
 def get_db_connection():
     return connect(
         host="localhost",
@@ -24,6 +23,7 @@ mycursor = conn.cursor(dictionary=True)
 @app.route('/', methods=['GET', 'POST'])
 def home():
     return render_template('home.html')
+
 
 @app.route('/submit_details', methods=['POST'])
 def submit_details():
@@ -39,7 +39,7 @@ def submit_details():
         host='localhost',
         user='root',
         password='Divya@2004',
-        database='uop'
+        database='uop' 
     )
     cursor = connection.cursor()
 
@@ -104,7 +104,7 @@ def login():
         try:
             cursor.execute("SELECT * FROM users WHERE username = %s AND password = %s", (username, password))
             user = cursor.fetchone()
-            if user:
+            if user and isinstance(user, dict):
                 session['username'] = user['username']
                 session['user_id'] = user['id']
                 flash("✅ Login successful!", "success")
@@ -244,32 +244,6 @@ def view_internship():
 
     return render_template('view_internship.html', internships=internships)
 
-
-
-
-@app.route('/view_cart')
-def view_cart():
-    user_id = session.get('user_id')
-    if not user_id:
-        flash("Please log in to view your cart.", "error")
-        return redirect('/login')
-
-    connection = get_db_connection()
-    if connection:
-        cursor = connection.cursor(dictionary=True)
-        try:
-            cursor.execute("SELECT * FROM cart WHERE user_id = %s", (user_id,))
-            cart_items = cursor.fetchall()
-            return render_template('cart.html', cart_items=cart_items)
-        except Error as e:
-            print(f"Error retrieving cart items: {e}")
-            flash("Could not retrieve cart items.", "error")
-        finally:
-            cursor.close()
-            connection.close()
-
-    return redirect('/dashboard')
-
 @app.route('/update_preferences', methods=['POST'])
 def update_preferences():
     notifications = request.form.get('notifications')
@@ -340,9 +314,11 @@ def profile():
             return redirect('/dashboard')
 
         # ✅ Step 4: Store data in session
-        session['email'] = user.get('email', 'N/A')
-        session['phone_number'] = user.get('phone_number', 'N/A')
-        session['joined_date'] = user.get('created_at').strftime('%d-%m-%Y') if user.get('created_at') else 'N/A'
+        if isinstance(user, dict):
+            session['email'] = user.get('email', 'N/A')
+            session['phone_number'] = user.get('phone_number', 'N/A')
+            created_at = user.get('created_at')
+            session['joined_date'] = created_at.strftime('%d-%m-%Y') if created_at else 'N/A'
 
     except Error as e:
         print(f"❌ Error fetching user details: {e}")
@@ -429,75 +405,6 @@ def logout():
 def logout_confirmation():
     return render_template('logout_confirmation.html')
 
-@app.route('/save_user_data', methods=['POST'])
-def save_user_data():
-    user_id = get_current_user_id()  # Function to get the logged-in user's ID
-    data = request.get_json()
-    
-    # Save user data to the database
-    save_user_info(user_id, data)  # Function to save user info in the database
-    return jsonify(success=True)
-
-@app.route('/internships')
-def internships():
-    if 'username' not in session:
-        flash('You are not logged in. Please log in first.', 'error')
-        return redirect(url_for('login'))
-    
-    # Establish database connection
-    mydb = mysql.connector.connect(**db_config)
-    mycursor = mydb.cursor()
-
-    sql = """
-        SELECT 
-            i.id, 
-            i.title, 
-            c.name AS company, 
-            c.headquarters, 
-            i.location, 
-            c.contact_number, 
-            c.contact_email, 
-            CASE 
-                WHEN i.paid = 1 THEN 'Yes' 
-                ELSE 'No' 
-            END AS paid, 
-            CASE 
-                WHEN c.isocertified = 1 THEN 'Yes' 
-                ELSE 'No' 
-            END AS isocertified, 
-            IFNULL(i.ratings, 'N/A') AS ratings, 
-            IFNULL(GROUP_CONCAT(CONCAT(f.duration, ': ', f.fee) SEPARATOR ', '), 'N/A') AS fees 
-        FROM internships i
-        INNER JOIN companies c ON i.company_id = c.id
-        LEFT JOIN fees f ON i.id = f.internship_id
-        GROUP BY i.id;
-    """
-    
-    try:
-        mycursor.execute(sql)
-        internships = mycursor.fetchall()
-    except mysql.connector.Error as err:
-        print(f"Error: {err}")
-        flash('An error occurred while fetching internships.', 'error')
-        internships = []
-    finally:
-        mycursor.close()  # Close the cursor
-        mydb.close()      # Close the database connection
-
-    return render_template('internships.html', internships=internships, username=session['username'])
-
-
-@app.route('/check_user_info', methods=['GET'])
-def check_user_info():
-    user_id = get_current_user_id()  # Function to get the logged-in user's ID
-    user_info = get_user_info(user_id)  # Function to fetch user info from the database
-
-    # Check if user info exists
-    if user_info:
-        return jsonify(infoSubmitted=True)
-    else:
-        return jsonify(infoSubmitted=False)
-    
 @app.route('/delete_internship', methods=['GET'])
 def delete_internship():
     title = request.args.get('title')

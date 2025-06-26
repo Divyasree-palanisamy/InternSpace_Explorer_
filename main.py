@@ -5,6 +5,7 @@ import re
 from mysql.connector import connect, Error
 from datetime import timedelta
 from datetime import datetime  
+import os
 
 
 app = Flask(__name__)
@@ -13,13 +14,13 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)
 
 def get_db_connection():
     return connect(
-        host="localhost",
-        user="root",
-        password="Divya@2004",
-        database="uop"
+        host=os.environ.get("DB_HOST", "localhost"),
+        user=os.environ.get("DB_USER", "root"),
+        password=os.environ.get("DB_PASSWORD", "Divya@2004"),
+        database=os.environ.get("DB_NAME", "uop"),
+        port=int(os.environ.get("DB_PORT", 3306))
     )
-conn = get_db_connection()
-mycursor = conn.cursor(dictionary=True)
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
     return render_template('home.html')
@@ -35,12 +36,7 @@ def submit_details():
     role = request.form.get('role')
 
     # Connect to the database
-    connection = mysql.connector.connect(
-        host='localhost',
-        user='root',
-        password='Divya@2004',
-        database='uop' 
-    )
+    connection = get_db_connection()
     cursor = connection.cursor()
 
     # SQL query to insert data

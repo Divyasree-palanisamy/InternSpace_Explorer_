@@ -13,6 +13,11 @@ app.secret_key = 'your_secret_key'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)
 
 def get_db_connection():
+    print("DB_HOST:", os.environ.get("DB_HOST"))
+    print("DB_USER:", os.environ.get("DB_USER"))
+    print("DB_PASSWORD:", os.environ.get("DB_PASSWORD"))
+    print("DB_NAME:", os.environ.get("DB_NAME"))
+    print("DB_PORT:", os.environ.get("DB_PORT"))
     return connect(
         host=os.environ.get("DB_HOST", "localhost"),
         user=os.environ.get("DB_USER", "root"),
@@ -423,4 +428,4 @@ def delete_internship():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 10000))) 
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 10000)), debug=True) 

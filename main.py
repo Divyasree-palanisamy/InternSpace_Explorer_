@@ -282,7 +282,6 @@ def help():
 
 @app.route('/recommended_internships', methods=['GET'])
 def recommended_internships():
-    # Logic for recommended internships page
     return render_template('recommended_internships.html')
 
 @app.route('/profile', methods=['GET'])
@@ -352,7 +351,6 @@ def filter_internships():
     filters = []
     params = []
 
-    # Adjusted column names based on the database schema
     if filterKeyword:
         filters.append("internship_title LIKE %s")
         params.append(f"%{filterKeyword}%")
@@ -360,12 +358,12 @@ def filter_internships():
         filters.append("department LIKE %s")
         params.append(f"%{filterDepartment}%")
     if filterDomain:
-        filters.append("department LIKE %s")  # If the domain is part of the department
+        filters.append("department LIKE %s")  
         params.append(f"%{filterDomain}%")
     if filterCountry or filterCity:
         filters.append("location LIKE %s")
         if filterCountry and filterCity:
-            params.append(f"%{filterCountry} {filterCity}%")  # Country and city in location
+            params.append(f"%{filterCountry} {filterCity}%")  
         else:
             params.append(f"%{filterCountry or filterCity}%")
     if filterDuration:
@@ -417,7 +415,6 @@ def delete_internship():
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    # Adjust the query based on your table structure
     cursor.execute("DELETE FROM internships WHERE internship_title = %s AND company_name = %s", (title, company))
     conn.commit()
 
@@ -428,4 +425,4 @@ def delete_internship():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 10000)), debug=True) 
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 10000)), debug=False) 

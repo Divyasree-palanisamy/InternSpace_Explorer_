@@ -13,20 +13,16 @@ app.secret_key = 'your_secret_key'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=7)
 
 def get_db_connection():
-    print("DB_HOST:", os.environ.get("DB_HOST"))
-    print("DB_USER:", os.environ.get("DB_USER"))
-    print("DB_PASSWORD:", os.environ.get("DB_PASSWORD"))
-    print("DB_NAME:", os.environ.get("DB_NAME"))
-    print("DB_PORT:", os.environ.get("DB_PORT"))
     return connect(
-        host=os.environ.get("DB_HOST", "localhost"),
-        user=os.environ.get("DB_USER", "root"),
-        password=os.environ.get("DB_PASSWORD", "Divya@2004"),
-        database=os.environ.get("DB_NAME", "uop"),
-        port=int(os.environ.get("DB_PORT", 3306))
+        host="localhost",
+        user= "root",
+        password= "Divya@2004",
+        database="uop",
     )
+    conn=get_db_connection()
+    mycursor=conn.cursor(dictionary=True)
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def home():
     return render_template('home.html')
 
@@ -41,7 +37,12 @@ def submit_details():
     role = request.form.get('role')
 
     # Connect to the database
-    connection = get_db_connection()
+    connection = mysql.connector.connect(
+           host="localhost",
+        user= "root",
+        password= "Divya@2004",
+        database="uop",
+    )
     cursor = connection.cursor()
 
     # SQL query to insert data
@@ -282,6 +283,7 @@ def help():
 
 @app.route('/recommended_internships', methods=['GET'])
 def recommended_internships():
+    # Logic for recommended internships page
     return render_template('recommended_internships.html')
 
 @app.route('/profile', methods=['GET'])
@@ -351,6 +353,7 @@ def filter_internships():
     filters = []
     params = []
 
+    # Adjusted column names based on the database schema
     if filterKeyword:
         filters.append("internship_title LIKE %s")
         params.append(f"%{filterKeyword}%")
@@ -358,12 +361,12 @@ def filter_internships():
         filters.append("department LIKE %s")
         params.append(f"%{filterDepartment}%")
     if filterDomain:
-        filters.append("department LIKE %s")  
+        filters.append("department LIKE %s")  # If the domain is part of the department
         params.append(f"%{filterDomain}%")
     if filterCountry or filterCity:
         filters.append("location LIKE %s")
         if filterCountry and filterCity:
-            params.append(f"%{filterCountry} {filterCity}%")  
+            params.append(f"%{filterCountry} {filterCity}%")  # Country and city in location
         else:
             params.append(f"%{filterCountry or filterCity}%")
     if filterDuration:
@@ -415,6 +418,7 @@ def delete_internship():
     conn = get_db_connection()
     cursor = conn.cursor()
 
+    # Adjust the query based on your table structure
     cursor.execute("DELETE FROM internships WHERE internship_title = %s AND company_name = %s", (title, company))
     conn.commit()
 
@@ -425,4 +429,4 @@ def delete_internship():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 10000)), debug=False) 
+    app.run(debug=True, port=5050) 

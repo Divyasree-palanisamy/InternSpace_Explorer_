@@ -1,134 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Internships - Coimbatore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-      body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #ffe4c4;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
 
-.container {
-    width: 90%;
-    max-width: 1200px;
-    background-color: #fff7e6;
-    padding: 20px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    overflow-x: auto;
-}
+        .container {
+            width: 97%;
+            max-width: 1350px;
+            margin: 48px auto 36px auto;
+            padding: 38px 12px 32px 12px;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 28px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.13);
+        }
 
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #d2691e;
-    font-size: 28px;
-    font-weight: bold;
-}
+        h1 {
+            text-align: center;
+            color: #00838f;
+            font-size: 2.7rem;
+            margin-bottom: 38px;
+            letter-spacing: 1.5px;
+        }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    background-color: #ffdab9;
-    border-radius: 10px;
-    overflow: hidden;
-}
+        .internship-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 38px 32px;
+        }
 
-th, td {
-    padding: 12px;
-    border: 1px solid #d2691e;
-    text-align: center;
-    color: #333;
-    font-size: 14px;
-}
+        .internship-card {
+            background: #fff;
+            border-radius: 22px;
+            box-shadow: 0 6px 24px rgba(0, 131, 143, 0.10);
+            padding: 34px 28px 22px 28px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.18s, box-shadow 0.18s;
+            position: relative;
+            margin-bottom: 10px;
+        }
 
-th {
-    background-color: #d2691e;
-    color: white;
-    font-weight: bold;
-    text-transform: uppercase;
-}
+        .internship-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 14px 40px rgba(0, 131, 143, 0.18);
+        }
 
-tr:hover {
-    background-color: #ffe4b5;
-    transition: 0.3s;
-}
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 18px;
+        }
 
-a {
-    color: #d2691e;
-    text-decoration: none;
-    font-weight: 600;
-}
+        .card-header .fa-briefcase {
+            color: #00838f;
+            font-size: 1.8rem;
+            margin-right: 15px;
+        }
 
-a:hover {
-    color: #a0522d;
-    text-decoration: underline;
-}
+        .internship-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #00838f;
+            letter-spacing: 0.5px;
+        }
 
-.back-link {
-    text-align: center;
-    margin-top: 15px;
-    color: #d2691e;
-    font-weight: 600;
-}
+        .company {
+            font-size: 1.08rem;
+            color: #006064;
+            margin-bottom: 12px;
+            margin-left: 2px;
+        }
 
+        .badges {
+            margin-bottom: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 10px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #e0f2f1;
+            color: #006064;
+            border-radius: 14px;
+            padding: 6px 16px;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0;
+            box-shadow: 0 1px 4px rgba(0, 131, 143, 0.07);
+        }
+
+        .badge.paid {
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+
+        .badge.unpaid {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .badge.iso {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .badge.ratings {
+            background: #fffde7;
+            color: #fbc02d;
+        }
+
+        .card-details {
+            margin-bottom: 18px;
+            padding-left: 2px;
+        }
+
+        .card-details span {
+            display: block;
+            color: #444;
+            font-size: 1.07rem;
+            margin-bottom: 7px;
+            letter-spacing: 0.1px;
+        }
+
+        .card-actions {
+            margin-top: auto;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .apply-btn {
+            background: linear-gradient(90deg, #00bcd4 0%, #00838f 100%);
+            color: #fff;
+            border: none;
+            border-radius: 22px;
+            padding: 10px 28px;
+            font-size: 1.08rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px rgba(0, 131, 143, 0.10);
+        }
+
+        .apply-btn:hover {
+            background: linear-gradient(90deg, #00838f 0%, #00bcd4 100%);
+            box-shadow: 0 4px 16px rgba(0, 131, 143, 0.13);
+        }
+
+        .delete-btn {
+            color: #c62828;
+            background: none;
+            border: none;
+            font-size: 1.13rem;
+            cursor: pointer;
+            text-decoration: underline;
+            margin-left: 10px;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .delete-btn:hover {
+            color: #8e0000;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 38px;
+        }
+
+        .back-link a {
+            color: #00838f;
+            font-weight: 700;
+            font-size: 1.13rem;
+            text-decoration: none;
+            padding: 10px 22px;
+            border-radius: 20px;
+            background: #e0f7fa;
+            box-shadow: 0 2px 8px rgba(0, 131, 143, 0.08);
+            transition: background 0.2s;
+        }
+
+        .back-link a:hover {
+            background: #b2ebf2;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 10px 2px;
+            }
+
+            .internship-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .internship-card {
+                padding: 18px 8px 14px 8px;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>Available Internships</h1>
-        <table>
-            <tr>
-                <th>Internship Title</th>
-                <th>Department</th>
-                <th>Company Name</th>
-                <th>Headquarters</th>
-                <th>Location</th>
-                <th>Duration</th>
-                <th>Fees</th>
-                <th>Contact Number</th>
-                <th>Contact Email</th>
-                <th>ISO Certified</th>
-                <th>Application Link</th>
-                <th>Paid</th>
-                <th>Ratings</th>
-                <th>Delete</th>
-
-            </tr>
+        <div class="internship-grid">
             {% for internship in internships %}
-            <tr>
-                <td>{{ internship['internship_title'] }}</td>
-                <td>{{ internship['department'] }}</td>
-                <td>{{ internship['company_name'] }}</td>
-                <td>{{ internship['headquarters'] }}</td>
-                <td>{{ internship['location'] }}</td>
-                <td>{{ internship['duration'] }}</td>
-                <td>{{ internship['fee'] }}</td>
-                <td>{{ internship['contact_number'] }}</td>
-                <td>{{ internship['contact_email'] }}</td>
-                <td>{{ 'Yes' if internship['iso_certified'] else 'No' }}</td>
-                <td><a href="{{ internship['application_link'] }}" target="_blank">Apply Here</a></td>
-                <td>{{ 'Yes' if internship['paid'] else 'No' }}</td>
-                <td>{{ internship['ratings'] }}</td>
-                <td>
-                    <a href="/delete_internship?title={{ internship['internship_title'] }}&company={{ internship['company_name'] }}" class="delete-btn">Delete</a>
-                </td>
-                
-            </tr>
+            <div class="internship-card">
+                <div class="card-header">
+                    <i class="fa-solid fa-briefcase"></i>
+                    <span class="internship-title">{{ internship['internship_title'] }}</span>
+                </div>
+                <div class="company"><i class="fa-solid fa-building"></i> {{ internship['company_name'] }}</div>
+                <div class="badges">
+                    <span class="badge">{{ internship['department'] }}</span>
+                    <span class="badge">{{ internship['location'] }}</span>
+                    <span class="badge">Duration: {{ internship['duration'] }}</span>
+                    <span class="badge">Fee: ₹{{ internship['fee'] }}</span>
+                    {% if internship['iso_certified'] %}
+                    <span class="badge iso"><i class="fa-solid fa-certificate"></i> ISO</span>
+                    {% endif %}
+                    {% if internship['paid'] %}
+                    <span class="badge paid"><i class="fa-solid fa-money-bill-wave"></i> Paid</span>
+                    {% else %}
+                    <span class="badge unpaid"><i class="fa-solid fa-hand-holding-dollar"></i> Unpaid</span>
+                    {% endif %}
+                    <span class="badge ratings"><i class="fa-solid fa-star"></i> {{ internship['ratings'] }}</span>
+                </div>
+                <div class="card-details">
+                    <span><b>Headquarters:</b> {{ internship['headquarters'] }}</span>
+                    <span><b>Contact:</b> {{ internship['contact_number'] }} | {{ internship['contact_email'] }}</span>
+                    <span><b>Application Link:</b> <a href="{{ internship['application_link'] }}" target="_blank">Apply
+                            Here <i class="fa-solid fa-arrow-up-right-from-square"></i></a></span>
+                </div>
+                <div class="card-actions">
+                    <a href="{{ internship['application_link'] }}" target="_blank" class="apply-btn">Apply Now</a>
+                    <a href="/delete_internship?title={{ internship['internship_title'] }}&company={{ internship['company_name'] }}"
+                        class="delete-btn"><i class="fa-solid fa-trash"></i> Delete</a>
+                </div>
+            </div>
             {% endfor %}
-        </table>
+        </div>
         <div class="back-link">
-            <a href="/dashboard">Go to Dashboard</a>
+            <a href="/dashboard"><i class="fa-solid fa-arrow-left"></i> Go to Dashboard</a>
         </div>
     </div>
 </body>
+
 </html>

@@ -36,32 +36,9 @@ def submit_details():
     phone = request.form.get('phone')
     role = request.form.get('role')
 
-    # Connect to the database
-    connection = mysql.connector.connect(
-           host="localhost",
-        user= "root",
-        password= "Divya@2004",
-        database="uop",
-    )
-    cursor = connection.cursor()
-
-    # SQL query to insert data
-    query = "INSERT INTO student_details (name, dob, email, phone, role) VALUES (%s, %s, %s, %s, %s)"
-    values = (name, dob, email, phone, role)
-
-    try:
-        # Execute the query
-        cursor.execute(query, values)
-        connection.commit()  # Commit the transaction to the database
-        flash("Details submitted successfully!", "success")
-    except Exception as e:
-        connection.rollback()  # Rollback in case of error
-        flash(f"Error: {str(e)}", "error")
-    finally:
-        cursor.close()
-        connection.close()
-
-    return redirect('/dashboard')  
+    # No database operations, just flash a message
+    flash("Details submitted successfully! (Not stored)", "success")
+    return redirect('/dashboard')
 
 @app.route('/dashboard')
 def dashboard():
